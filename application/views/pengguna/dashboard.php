@@ -25,8 +25,7 @@
 						<thead>
 							<tr class="align-self-center">
 								<th width="10%" class="text-center">Tanggal</th>
-								<th>Sayur</th>
-								<th>Total</th>
+								<th>Jumlah wishlist sayur</th>
 								<th> </th>
 							</tr>
 						</thead>
@@ -34,14 +33,14 @@
 							<?php if(!empty($wishlist)):?>
 							<?php foreach($wishlist as $val):?>
 							<tr>
-								<td class="text-center"><?= date("d F Y", $val->created_at);?></td>
-								<td><?= $val->sayur;?></td>
-								<td><?= number_format($val->jumlah);?> buah</td>
+								<td class="text-center"><?= date("d F Y", $val['created_at']);?></td>
+								<td><?= number_format(count($val['keranjang']));?> sayur</td>
 								<td width="10%" class="text-center"><button class="btn btn-primary btn-sm"
-										data-toggle="modal" data-target="#detail-wishlist-<?= $val->id;?>">detail</button></td>
+										data-toggle="modal"
+										data-target="#detail-wishlist-<?= $val['id'];?>">detail</button></td>
 
-								<div id="detail-wishlist-<?= $val->id;?>" class="modal fade" tabindex="-1" role="dialog"
-									aria-labelledby="mySmallModalLabel" aria-hidden="true">
+								<div id="detail-wishlist-<?= $val['id'];?>" class="modal fade" tabindex="-1"
+									role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -53,19 +52,17 @@
 											</div>
 											<div class="modal-body p-4">
 												<dl class="row mb-0">
-
+													<?php foreach($val['keranjang'] as $item):?>
 													<dt class="col-sm-3">Sayur</dt>
-													<dd class="col-sm-9"><?= $val->sayur;?></dd>
-
-													<dt class="col-sm-3">Jumlah</dt>
-													<dd class="col-sm-9"><?= number_format($val->jumlah);?> buah</dd>
-
+													<dd class="col-sm-9"><?= $item->sayur;?> - <?= number_format($item->jumlah);?> buah</dd>
+													<?php endforeach;?>
+													<hr>
 													<dt class="col-sm-3">Catatan</dt>
-													<dd class="col-sm-9"><?= $val->catatan;?></dd>
+													<dd class="col-sm-9"><?= $val['catatan'];?></dd>
 												</dl>
 												<hr>
-												<small class="text-secondary">Wishlist pada <?= date("d F Y - H:i", $val->created_at);?>
-													WIB</small>
+												<small class="text-secondary">Wishlist pada
+													<?= date("d F Y - H:i", $val['created_at']);?> WIB</small>
 											</div>
 										</div><!-- /.modal-content -->
 									</div><!-- /.modal-dialog -->

@@ -21,6 +21,7 @@ class Home extends CI_Controller
 
     public function index()
     {
+        // $this->session->unset_userdata('keranjang');
         $this->add_pengunjung();
         if($this->input->get('cari')){
             $data['sayur'] = $this->M_home->get_sayurHome($this->input->get('cari'));
@@ -33,6 +34,56 @@ class Home extends CI_Controller
     public function add_pengunjung(){
         $device = $this->agent->agent_string();
         $this->M_home->add_pengunjung($device);
+    }
+
+    public function add_cartWish(){
+        if ($this->session->userdata('logged_in') == false || !$this->session->userdata('logged_in')) {
+            if (!empty($_SERVER['QUERY_STRING'])) {
+                $uri = uri_string() . '?' . $_SERVER['QUERY_STRING'];
+            } else {
+                $uri = uri_string();
+            }
+            
+            // send to login first, then continued activities
+            $this->session->set_userdata('redirect', $uri);
+            $this->session->set_flashdata('error', "Harap login ke akun anda, untuk melanjutkan");
+            redirect('login');
+        }
+
+        if ($this->M_home->cek_aktivasi($this->session->userdata('user_id')) == true) {
+            $this->session->set_flashdata('warning', "Harap melakukan aktivasi akun terlebih dahulu!");
+            redirect(site_url('aktivasi-akun'));
+        }
+
+        // OTP REQUIRE
+        if (($this->session->userdata('otp') == false || !$this->session->userdata('otp')) && $this->session->userdata('role') == 2) {
+            $this->session->set_flashdata('warning', "Harap melakukan proses OTP !");
+            redirect(site_url('otp'));
+        }
+
+        $cart = $this->session->userdata('keranjang') ? $this->session->userdata('keranjang') : [];
+        
+
+        $sayur_id = $this->input->post('id');
+        $sayur = $this->input->post('sayur');
+        $gambar = $this->input->post('gambar');
+        $jumlah = $this->input->post('jumlah');
+
+        $new_cart = [
+            'sayur_id' => $sayur_id,
+            'sayur' => $sayur,
+            'gambar' => $gambar,
+            'jumlah' => $jumlah
+        ];
+
+        array_push($cart, $new_cart);
+
+        
+        $this->session->set_userdata(['keranjang' => $cart]);
+        // ej($this->session->userdata('keranjang'));
+        $this->session->set_flashdata('notif_success', 'Berhasil menambahkan sayur ke keranjang anda !');
+        redirect($this->agent->referrer());
+
     }
 
     public function tambah_wishlist(){
@@ -60,17 +111,12 @@ class Home extends CI_Controller
             redirect(site_url('otp'));
         }
 
-        $id = $this->input->post('id');
-        if ($this->M_home->cek_sayur($id) == true) {
-            if ($this->M_home->tambah_wishlist($id) == true) {
-                $this->session->set_flashdata('notif_success', 'Berhasil menambahkan sayur ke wishlist anda');
-                redirect($this->agent->referrer());
-            } else {
-                $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba menambahkan sayur ke wishlist anda. Coba lagi nanti !');
-                redirect($this->agent->referrer());
-            }
+        if ($this->M_home->tambah_wishlist() == true) {
+            $this->session->unset_userdata('keranjang');
+            $this->session->set_flashdata('notif_success', 'Berhasil menambahkan sayur ke wishlist anda');
+            redirect($this->agent->referrer());
         } else {
-            $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba mengambil data sayur. Coba lagi nanti !');
+            $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba menambahkan sayur ke wishlist anda. Coba lagi nanti !');
             redirect($this->agent->referrer());
         }
     }

@@ -49,19 +49,38 @@ class M_home extends CI_Model
     }
 
 
-    function tambah_wishlist($id){
-        $jumlah = $this->input->post('jumlah');
+    function tambah_wishlist(){
+        $this->db->trans_strict(false);
+
         $catatan = $this->input->post('catatan');
 
         $data = [
             'user_id' => $this->session->userdata('user_id'),
-            'sayur_id' => $id,
-            'jumlah' => $jumlah,
             'catatan' => $catatan,
             'created_at' => time()
         ];
-
+        $this->db->trans_begin();
         $this->db->insert('tb_wishlist', $data);
-        return ($this->db->affected_rows() != 1) ? false : true;
+        $wish_id = $this->db->insert_id();
+
+        foreach($this->session->userdata('keranjang') as $key => $val):
+            $arrDetail = [
+                'wishlist_id' => $wish_id,
+                'jumlah' => $val['jumlah'],
+                'sayur_id' => $val['sayur_id']
+            ];
+
+            $this->db->insert('tb_wishlist_detail', $arrDetail);
+        endforeach;
+        
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === false) {
+            $this->db->trans_rollback();
+            return false;
+        } else {
+            $this->db->trans_commit();
+            return true;
+        }
     }
 }

@@ -52,19 +52,25 @@
 				<img class="card-img-top img-fluid" src="<?= base_url();?><?= $val->gambar;?>" alt="Card image cap">
 			</div>
 			<?php if($this->session->userdata('logged_in') == false || !$this->session->userdata('logged_in')):?>
-				<a href="<?= site_url('login');?>" class="btn btn-primary btn-sm waves-effect waves-light"
-					data-toggle="tooltip" data-placement="top" title=""
-					data-original-title="Sudah berada di wishlist anda"><i class="dripicons-bookmarks"></i> Tambahkan ke wishlist</a>
+			<a href="<?= site_url('login');?>" class="btn btn-primary btn-sm waves-effect waves-light"
+				data-toggle="tooltip" data-placement="top" title="" data-original-title="Tambahkan ke keranjang"><i
+					class="dripicons-cart mr-2"></i> Tambahkan ke keranjang</a>
 			<?php else:?>
-			<button type="button" class="btn btn-primary btn-sm waves-effect waves-light"
-				data-toggle="modal" data-target="#tambah-wishlist-<?= $val->id;?>"><i
-					class="dripicons-bookmarks"></i>Tambahkan ke wishlist</button>
+			<?php if($this->session->userdata('role') == 2):?>
+			<button type="button" class="btn btn-primary btn-sm waves-effect waves-light" data-toggle="modal"
+				data-target="#tambah-wishlist-<?= $val->id;?>"><i class="dripicons-cart mr-2"></i>Tambahkan ke
+				keranjang</button>
+			<?php else:?>
+			<a href="<?= site_url('logout');?>" class="btn btn-primary btn-sm waves-effect waves-light"><i
+					class="dripicons-cart mr-2"></i>Login ke akun pengguna</a>
+			<?php endif;?>
 			<?php endif;?>
 			<div class="card-body">
 				<h4 class="card-title font-20 mt-0"><?= $val->sayur;?></h4>
 				<p class="font-13 text-muted"><?= $val->keterangan;?></p>
 				<hr>
-				<h5 class="mb-0"><span class="h6">stok: <?= number_format($val->stok);?></span><span class="float-right pull-right">Rp. <?= number_format($val->harga);?></span></h5>
+				<h5 class="mb-0"><span class="h6">stok: <?= number_format($val->stok);?></span><span
+						class="float-right pull-right">Rp. <?= number_format($val->harga);?></span></h5>
 			</div>
 		</div>
 
@@ -81,8 +87,10 @@
 					</button>
 				</div>
 				<div class="modal-body p-4">
-					<form action="<?= site_url('home/tambah_wishlist');?>" method="post" enctype="multipart/form-data">
+					<form action="<?= site_url('home/add_cartWish');?>" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="id" value="<?= $val->id;?>" required>
+						<input type="hidden" name="sayur" value="<?= $val->sayur;?>" required>
+						<input type="hidden" name="gambar" value="<?= base_url();?><?= $val->gambar;?>" required>
 						<p>Tambahkan <b><?= $val->sayur;?></b> kedalam wishlist anda, lengkapi data dibawah ini untuk
 							melanjutkan</p>
 						<div class="form-group">
@@ -95,12 +103,6 @@
 									<span class="input-group-text" id="inputGroup-sizing-lg">buah</span>
 								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputKeteranganSayur" class="input-label">Tam bahkan catatan <small
-									class="text-secondary">(optional)</small></label>
-							<textarea class="form-control" name="keterangan" id="inputKeteranganSayur" name="catatan"
-								rows="5"><?= $val->keterangan;?></textarea>
 						</div>
 						<div class="modal-footer px-0 mx-0">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

@@ -54,12 +54,14 @@ class M_admin extends CI_Model
     function tambah_sayur($gambar){
         $sayur = $this->input->post('sayur');
         $harga = $this->input->post('harga');
+        $stok = $this->input->post('stok');
         $keterangan = $this->input->post('keterangan');
 
         $data = [
             'sayur' => $sayur,
             'gambar' => $gambar == null ? 'assets/images/placeholder.png' : $gambar,
             'harga' => $harga,
+            'stok' => $stok,
             'keterangan' => $keterangan
         ];
 
@@ -72,14 +74,24 @@ class M_admin extends CI_Model
 
         $sayur = $this->input->post('sayur');
         $harga = $this->input->post('harga');
+        $stok = $this->input->post('stok');
         $keterangan = $this->input->post('keterangan');
-
-        $data = [
-            'sayur' => $sayur,
-            'gambar' => $gambar == null ? 'assets/images/placeholder.png' : $gambar,
-            'harga' => str_replace('.', '', $harga),
-            'keterangan' => $keterangan
-        ];
+        if($gambar == null){
+            $data = [
+                'sayur' => $sayur,
+                'harga' => str_replace('.', '', $harga),
+                'stok' => $stok,
+                'keterangan' => $keterangan
+            ];
+        }else{
+            $data = [
+                'sayur' => $sayur,
+                'gambar' => $gambar == null ? 'assets/images/placeholder.png' : $gambar,
+                'harga' => str_replace('.', '', $harga),
+                'stok' => $stok,
+                'keterangan' => $keterangan
+            ];
+        }
 
         $this->db->where('id', $id);
         $this->db->update('tb_sayur', $data);

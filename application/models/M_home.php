@@ -18,15 +18,13 @@ class M_home extends CI_Model
     }
 
     function get_sayurHome($cari = null){
-        $this->db->select('a.*, b.user_id');
+        $this->db->select('a.*');
         $this->db->from('tb_sayur a');
-        $this->db->join('tb_wishlist b', 'a.id = b.sayur_id', 'left');
         $this->db->where('a.is_deleted', 0);
         if($cari != null){
             $this->db->like('sayur', $cari);
         }
         $this->db->order_by('a.created_at DESC');
-        $this->db->group_by('a.id');
 
         return $this->db->get()->result();
     }

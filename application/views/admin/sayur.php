@@ -34,6 +34,7 @@
 								<th width="10%"> </th>
 								<th>Sayur</th>
 								<th>Harga</th>
+								<th>Stok</th>
 								<th>Keterangan</th>
 							</tr>
 						</thead>
@@ -54,6 +55,7 @@
 									<?= $val->sayur;?>
 								</td>
 								<td>Rp. <?= number_format($val->harga);?></td>
+								<td><?= number_format($val->stok);?> buah</td>
 								<td><button class="btn btn-primary btn-sm" data-toggle="modal"
 										data-target="#keterangan-<?= $val->id;?>">keterangan</button></td>
 							</tr>
@@ -70,8 +72,7 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<form action="<?= site_url('admin/edit_sayur');?>" method="post"
-												enctype="multipart/form-data">
+											<form action="<?= site_url('admin/edit_sayur');?>" method="post" enctype="multipart/form-data">
 												<input type="hidden" name="id" value="<?= $val->id;?>" required>
 
 												<div class="form-group">
@@ -81,9 +82,7 @@
 												</div>
 												<div class="form-group">
 													<label for="inputNamaSayur" class="input-label">Gambar Sayur <small class="text-secondary">(optional)</small></label>
-													<input type="file" id="input-file-now" name="image" class="dropify"
-														data-default-file="<?= base_url();?><?= $val->gambar;?>"
-														required>
+													<input type="file" name="image" class="form-control" >
 												</div>
 												<div class="form-group">
 													<label for="inputNamaSayur" class="input-label">Harga Sayur <small class="text-danger">*</small></label>
@@ -93,7 +92,16 @@
 																id="inputGroup-sizing-lg">Rp.</span>
 														</div>
 														<input type="number" class="form-control"
-															value="<?= number_format($val->harga);?>" required>
+															value="<?= $val->harga;?>" name="harga" required>
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="inputNamaSayur" class="input-label">Stok Sayur <small class="text-danger">*</small></label>
+													<div class="input-group">
+														<input type="number" class="form-control" name="stok" value="<?= $val->stok;?>" required>
+														<div class="input-group-append">
+															<span class="input-group-text" id="inputGroup-sizing-lg">buah</span>
+														</div>
 													</div>
 												</div>
 												<div class="form-group">
@@ -198,6 +206,15 @@
 								<span class="input-group-text" id="inputGroup-sizing-lg">Rp.</span>
 							</div>
 							<input type="number" class="form-control" name="harga" placeholder="Masukkan harga sayur" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputNamaSayur" class="input-label">Stok Sayur <small class="text-danger">*</small></label>
+						<div class="input-group">
+							<input type="number" class="form-control" name="stok" placeholder="Masukkan stok sayur" required>
+							<div class="input-group-append">
+								<span class="input-group-text" id="inputGroup-sizing-lg">buah</span>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">

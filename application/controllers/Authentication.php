@@ -72,8 +72,13 @@ class Authentication extends CI_Controller
                         $this->session->set_flashdata('success', 'Anda telah masuk. Silahkan melanjutkan aktivitas anda!');
                         redirect($this->session->userdata('redirect'));
                     } else {
-                        $this->session->set_flashdata('success', "Selamat datang!");
-                        redirect(site_url('home'));
+                        if($user->role == 1){
+                            $this->session->set_flashdata('success', "Selamat datang admin!");
+                            redirect(site_url('admin'));
+                        }else{
+                            $this->session->set_flashdata('success', "Selamat datang!");
+                            redirect(site_url('home'));
+                        }
                     }
                 }
             } else {

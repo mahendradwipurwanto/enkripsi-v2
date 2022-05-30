@@ -101,7 +101,7 @@ class Admin extends CI_Controller
                 $this->session->set_flashdata('notif_success', 'Berhasil menambahkan data sayur');
                 redirect($this->agent->referrer());
             } else {
-                $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba menambahkan data sayur. Coba lagi nanti !');
+                $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba mengubah data sayur. Coba lagi nanti !');
                 redirect(site_url('admin/kelola-sayur'));
             }
 

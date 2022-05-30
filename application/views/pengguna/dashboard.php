@@ -18,7 +18,7 @@
 	<div class="col-xl-12">
 		<div class="card">
 			<div class="card-body">
-				<h5 class="header-title pb-3 mt-0">Data Wishlistmu</h5>
+				<h5 class="header-title pb-3 mt-0">Data produk yang ingin dipesan</h5>
 				<div class="table-responsive">
 					<table class="table table-hover table-striped dt-responsive nowrap"
 						style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatable-buttons">

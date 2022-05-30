@@ -50,21 +50,21 @@
 		<div class="card">
 			<div class="card-sayur">
 				<img class="card-img-top img-fluid" src="<?= base_url();?><?= $val->gambar;?>" alt="Card image cap">
-				<?php if($this->session->userdata('logged_in') == false || !$this->session->userdata('logged_in')):?>
-					<a href="<?= site_url('login');?>" class="btn btn-primary btn-sm waves-effect waves-light btn-wish"
-						data-toggle="tooltip" data-placement="top" title=""
-						data-original-title="Sudah berada di wishlist anda"><i class="dripicons-bookmarks"></i></a>
-				<?php else:?>
-				<button type="button" class="btn btn-primary btn-sm waves-effect waves-light btn-wish"
-					data-toggle="modal" data-target="#tambah-wishlist-<?= $val->id;?>"><i
-						class="dripicons-bookmarks"></i></button>
-				<?php endif;?>
 			</div>
+			<?php if($this->session->userdata('logged_in') == false || !$this->session->userdata('logged_in')):?>
+				<a href="<?= site_url('login');?>" class="btn btn-primary btn-sm waves-effect waves-light"
+					data-toggle="tooltip" data-placement="top" title=""
+					data-original-title="Sudah berada di wishlist anda"><i class="dripicons-bookmarks"></i> Tambahkan ke wishlist</a>
+			<?php else:?>
+			<button type="button" class="btn btn-primary btn-sm waves-effect waves-light"
+				data-toggle="modal" data-target="#tambah-wishlist-<?= $val->id;?>"><i
+					class="dripicons-bookmarks"></i>Tambahkan ke wishlist</button>
+			<?php endif;?>
 			<div class="card-body">
 				<h4 class="card-title font-20 mt-0"><?= $val->sayur;?></h4>
 				<p class="font-13 text-muted"><?= $val->keterangan;?></p>
 				<hr>
-				<h5 class="mb-0 text-right">Rp. <?= number_format($val->harga);?></h5>
+				<h5 class="mb-0"><span class="h6">stok: <?= number_format($val->stok);?></span><span class="float-right pull-right">Rp. <?= number_format($val->harga);?></span></h5>
 			</div>
 		</div>
 

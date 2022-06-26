@@ -62,7 +62,7 @@ class Uploader
 
             $config['upload_path']      =  "./{$path}/";
             $config['allowed_types']    = '*';
-            $config['max_size']         = 5 * 1024;
+            $config['max_size']         = 25 * 1024;
             $config['overwrite']        = true;
             $config['file_name']        = "{$filename}.jpg";
 

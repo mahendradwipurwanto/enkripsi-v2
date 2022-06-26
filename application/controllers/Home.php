@@ -61,28 +61,35 @@ class Home extends CI_Controller
             redirect(site_url('otp'));
         }
 
-        $cart = $this->session->userdata('keranjang') ? $this->session->userdata('keranjang') : [];
-        
+        if($this->M_home->get_sayur($this->input->post('id'), $this->input->post('jumlah')) == true){
+            $cart = $this->session->userdata('keranjang') ? $this->session->userdata('keranjang') : [];
+            
 
-        $sayur_id = $this->input->post('id');
-        $sayur = $this->input->post('sayur');
-        $gambar = $this->input->post('gambar');
-        $jumlah = $this->input->post('jumlah');
+            $sayur_id = $this->input->post('id');
+            $sayur = $this->input->post('sayur');
+            $gambar = $this->input->post('gambar');
+            $jumlah = $this->input->post('jumlah');
 
-        $new_cart = [
-            'sayur_id' => $sayur_id,
-            'sayur' => $sayur,
-            'gambar' => $gambar,
-            'jumlah' => $jumlah
-        ];
+            $new_cart = [
+                'sayur_id' => $sayur_id,
+                'sayur' => $sayur,
+                'gambar' => $gambar,
+                'jumlah' => $jumlah
+            ];
 
-        array_push($cart, $new_cart);
+            array_push($cart, $new_cart);
 
-        
-        $this->session->set_userdata(['keranjang' => $cart]);
-        // ej($this->session->userdata('keranjang'));
-        $this->session->set_flashdata('notif_success', 'Berhasil menambahkan sayur ke keranjang anda !');
-        redirect($this->agent->referrer());
+            $this->M_home->updateJumlahSayur($sayur_id, $jumlah);
+            
+            $this->session->set_userdata(['keranjang' => $cart]);
+            // ej($this->session->userdata('keranjang'));
+            $this->session->set_flashdata('notif_success', 'Berhasil menambahkan sayur ke keranjang anda !');
+            redirect($this->agent->referrer());
+        }else{
+            $this->session->set_flashdata('notif_warning', 'Jumlah permintaan anda melebihi stok yang tersedia !');
+            redirect($this->agent->referrer());
+
+        }
 
     }
 

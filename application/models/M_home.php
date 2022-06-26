@@ -48,6 +48,28 @@ class M_home extends CI_Model
         }
     }
 
+    function get_sayur($id, $jumlah){
+        $sayur = $this->db->get_where('tb_sayur', ['id' => $id])->row();
+
+        if(isset($sayur)){
+            if($sayur->stok > $jumlah){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    function updateJumlahSayur($id, $jumlah){
+        $sayur = $this->db->get_where('tb_sayur', ['id' => $id])->row();
+
+        $stok_baru = $sayur->stok-$jumlah;
+        $this->db->where('id', $id);
+        $this->db->update('tb_sayur', ['stok' => $stok_baru]);
+    }
+
 
     function tambah_wishlist(){
         $this->db->trans_strict(false);

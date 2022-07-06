@@ -12,7 +12,7 @@ class M_auth extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tb_auth a');
-        $this->db->join('tb_auth b', 'a.user_id = b.user_id');
+        $this->db->join('tb_user b', 'a.user_id = b.user_id');
         $this->db->where('a.email', $email);
         $query = $this->db->get();
     
@@ -28,7 +28,7 @@ class M_auth extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tb_auth a');
-        $this->db->join('tb_auth b', 'a.user_id = b.user_id');
+        $this->db->join('tb_user b', 'a.user_id = b.user_id');
         $this->db->where('a.email', $email);
         $query = $this->db->get();
     
@@ -44,7 +44,7 @@ class M_auth extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tb_auth a');
-        $this->db->join('tb_auth b', 'a.user_id = b.user_id');
+        $this->db->join('tb_user b', 'a.user_id = b.user_id');
         $this->db->where('a.user_id', $user_id);
         ;
         $query = $this->db->get();

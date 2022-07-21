@@ -24,9 +24,9 @@ class Home extends CI_Controller
         // $this->session->unset_userdata('keranjang');
         $this->add_pengunjung();
         if($this->input->get('cari')){
-            $data['sayur'] = $this->M_home->get_sayurHome($this->input->get('cari'));
+            $data['sayur'] = $this->M_home->get_sprodukome($this->input->get('cari'));
         }else{
-            $data['sayur'] = $this->M_home->get_sayurHome();
+            $data['sayur'] = $this->M_home->get_sprodukome();
         }
         $this->templatefront->view('home/home', $data);
     }
@@ -61,17 +61,17 @@ class Home extends CI_Controller
             redirect(site_url('otp'));
         }
 
-        if($this->M_home->get_sayur($this->input->post('id'), $this->input->post('jumlah')) == true){
+        if($this->M_home->get_produk($this->input->post('id'), $this->input->post('jumlah')) == true){
             $cart = $this->session->userdata('keranjang') ? $this->session->userdata('keranjang') : [];
             
 
-            $sayur_id = $this->input->post('id');
+            $produk_id = $this->input->post('id');
             $sayur = $this->input->post('sayur');
             $gambar = $this->input->post('gambar');
             $jumlah = $this->input->post('jumlah');
 
             $new_cart = [
-                'sayur_id' => $sayur_id,
+                'produk_id' => $produk_id,
                 'sayur' => $sayur,
                 'gambar' => $gambar,
                 'jumlah' => $jumlah
@@ -79,7 +79,7 @@ class Home extends CI_Controller
 
             array_push($cart, $new_cart);
 
-            $this->M_home->updateJumlahSayur($sayur_id, $jumlah);
+            $this->M_home->updateJumlahProduk($produk_id, $jumlah);
             
             $this->session->set_userdata(['keranjang' => $cart]);
             // ej($this->session->userdata('keranjang'));

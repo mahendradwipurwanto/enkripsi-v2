@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ngodingin_otpsayur`
+-- Database: `ngodingin_otpproduk`
 --
 
 -- --------------------------------------------------------
@@ -47,7 +47,7 @@ CREATE TABLE `tb_auth` (
 
 INSERT INTO `tb_auth` (`user_id`, `email`, `password`, `status`, `role`, `aktivasi`, `otp`, `expired_otp`, `created_at`, `is_deleted`) VALUES
 (3, 'developpertech@gmail.com', '$2y$10$GnGcKOxBYAUfCV6j94iMZOgJt5LGA7ftcPhvwpwiHibmt1jsxvxAm', 1, 2, '7ddf59f5d3dd77e35ef6ef18745207a7a5f2961880908a4b14ad516f4ffd4c103cb02f48c1590d8952cb7383e2f130e3c3f177f8b7bb528963cb88cc0481da50YiMlZTwJjKWs2Ujxkt9JwCwgAc6L6vPEAyvNxtTIlY4=', '9da8ac5cd6064dba7bfc32cf83f65d4adb6274b3de103d899c5ef5d1d8a38933f1fadce2588c3564f7f4385a42f9a10e67d137532700e597538654fabdc93f37tK6q41cnCBC9GZ3lQSI0W5B4B8zf/YgfZZarSzqRMxs=', '1653843048', 0, 0),
-(5, 'admin@tokosayur.com', '$2y$10$31CQBgl.x.HsutNvGn6IaucdHM8tpyp4/ymL4qF7IpYm4T/QBGTYO', 1, 1, '0f49f2360cfbcfb6f0e033f40faff81437ba612bf45b15ebdba9497ccff2d2488c7b7adb89b011b4aec44e01c2647c22f1d9d91d92aa17c14dbaa1b7bc9ce7fcn5d3vWDzwKCfCnKRYtG8m8A+2svUN8hIQ3JOJcN96bw=', 'eda15e5c1f2778f0a2b8323f0914ca8fcc530e55fef4e5d9ad4e6d214509ac3f3bcac94d55d994942c54cb9ba79fcf068bf8c8422f89d0c8b5b45e2a4a917b6b8fo6H+TYmVxHfBFhrWLw0TlJ9VfhB8+I1QBjLQN73Vo=', '1653839610', 0, 0),
+(5, 'admin@tokoproduk.com', '$2y$10$31CQBgl.x.HsutNvGn6IaucdHM8tpyp4/ymL4qF7IpYm4T/QBGTYO', 1, 1, '0f49f2360cfbcfb6f0e033f40faff81437ba612bf45b15ebdba9497ccff2d2488c7b7adb89b011b4aec44e01c2647c22f1d9d91d92aa17c14dbaa1b7bc9ce7fcn5d3vWDzwKCfCnKRYtG8m8A+2svUN8hIQ3JOJcN96bw=', 'eda15e5c1f2778f0a2b8323f0914ca8fcc530e55fef4e5d9ad4e6d214509ac3f3bcac94d55d994942c54cb9ba79fcf068bf8c8422f89d0c8b5b45e2a4a917b6b8fo6H+TYmVxHfBFhrWLw0TlJ9VfhB8+I1QBjLQN73Vo=', '1653839610', 0, 0),
 (6, 'anangcb04@gmail.com', '$2y$10$LijlKfWq.cJlOUgeBYqlx.nYvHJfSlgnJ4UFq5fRNsAino7tq289W', 1, 2, '09b5e9ebf9b35fb523a51ad8fd7222bea58e45ebc893ca8373aded64b2efa9402c828eee443cb05197277f3f13be3af809de72e52d91f8e24b03d5e35334425ebx7YgOYLeytxIYzcAl2fgskoRY0jl2DCAQoP/0IDhus=', 'e9c735223a53a4df238e39ea51a41918554acf6c6b29fcbcad7727729482d40a0b9ac08824daf7128f93b1603d5d138454ab6494c7feaab8fc48021848e05655D+QW/hYwUXxFvomupbWtHFf97oLC1cmWR+V6uHz3nY8=', '1656309579', 1653911401, 0);
 
 -- --------------------------------------------------------
@@ -1886,10 +1886,10 @@ INSERT INTO `tb_pengunjung` (`id`, `device`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_sayur`
+-- Struktur dari tabel `tb_produk`
 --
 
-CREATE TABLE `tb_sayur` (
+CREATE TABLE `tb_produk` (
   `id` int(11) NOT NULL,
   `sayur` varchar(50) DEFAULT NULL,
   `gambar` varchar(255) DEFAULT 'assets/images/placeholder.png',
@@ -1901,10 +1901,10 @@ CREATE TABLE `tb_sayur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `tb_sayur`
+-- Dumping data untuk tabel `tb_produk`
 --
 
-INSERT INTO `tb_sayur` (`id`, `sayur`, `gambar`, `harga`, `stok`, `keterangan`, `created_at`, `is_deleted`) VALUES
+INSERT INTO `tb_produk` (`id`, `sayur`, `gambar`, `harga`, `stok`, `keterangan`, `created_at`, `is_deleted`) VALUES
 (8, 'Wortel', 'berkas/sayur/1656230601.jpg', 25000, 8, '', 0, 0),
 (9, 'Kentang Segar', 'berkas/sayur/1656230554.jpg', 250000, 25, '', 0, 0),
 (10, 'bit', 'berkas/sayur/1653952633.jpg', 36000, 20, 'harga per kg', 0, 0);
@@ -1929,7 +1929,7 @@ CREATE TABLE `tb_settings` (
 --
 
 INSERT INTO `tb_settings` (`key`, `value`, `desc`, `created_at`, `modified_at`, `is_deleted`) VALUES
-('mailer_alias', 'Toko Sayur Oduwa', NULL, 1653641032, 0, 0),
+('mailer_alias', 'Toko Produk Oduwa', NULL, 1653641032, 0, 0),
 ('mailer_host', 'smtp.gmail.com', NULL, 1653641032, 0, 0),
 ('mailer_mode', '0', NULL, 1653641032, 0, 0),
 ('mailer_password', 'hazyzcmjpgjfjitd', NULL, 1653641032, 0, 0),
@@ -1938,7 +1938,7 @@ INSERT INTO `tb_settings` (`key`, `value`, `desc`, `created_at`, `modified_at`, 
 ('web_desc', 'This is Base Project Template', NULL, 1653641032, 0, 0),
 ('web_icon', 'favicon.ico', NULL, 1653641032, 0, 0),
 ('web_logo', 'favicon.ico', NULL, 1653641032, 0, 0),
-('web_title', 'Toko Sayur Oduwa', NULL, 1653641032, 0, 0);
+('web_title', 'Toko Produk Oduwa', NULL, 1653641032, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1997,7 +1997,7 @@ INSERT INTO `tb_wishlist` (`id`, `user_id`, `catatan`, `status`, `created_at`, `
 
 CREATE TABLE `tb_wishlist_detail` (
   `wishlist_id` int(11) DEFAULT NULL,
-  `sayur_id` int(11) DEFAULT NULL,
+  `produk_id` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -2005,7 +2005,7 @@ CREATE TABLE `tb_wishlist_detail` (
 -- Dumping data untuk tabel `tb_wishlist_detail`
 --
 
-INSERT INTO `tb_wishlist_detail` (`wishlist_id`, `sayur_id`, `jumlah`) VALUES
+INSERT INTO `tb_wishlist_detail` (`wishlist_id`, `produk_id`, `jumlah`) VALUES
 (11, 8, 25),
 (11, 8, 5),
 (12, 8, 25),
@@ -2032,9 +2032,9 @@ ALTER TABLE `tb_pengunjung`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_sayur`
+-- Indeks untuk tabel `tb_produk`
 --
-ALTER TABLE `tb_sayur`
+ALTER TABLE `tb_produk`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2066,9 +2066,9 @@ ALTER TABLE `tb_pengunjung`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1814;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_sayur`
+-- AUTO_INCREMENT untuk tabel `tb_produk`
 --
-ALTER TABLE `tb_sayur`
+ALTER TABLE `tb_produk`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --

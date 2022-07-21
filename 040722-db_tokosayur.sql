@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.22-MariaDB : Database - db_otpsayur
+MySQL - 10.4.22-MariaDB : Database - db_otpproduk
 *********************************************************************
 */
 
@@ -34,7 +34,7 @@ CREATE TABLE `tb_auth` (
 /*Data for the table `tb_auth` */
 
 insert  into `tb_auth`(`user_id`,`email`,`password`,`status`,`role`,`aktivasi`,`otp`,`expired_otp`,`created_at`,`is_deleted`) values 
-(5,'admin@tokosayur.com','$2y$10$31CQBgl.x.HsutNvGn6IaucdHM8tpyp4/ymL4qF7IpYm4T/QBGTYO',1,1,'0f49f2360cfbcfb6f0e033f40faff81437ba612bf45b15ebdba9497ccff2d2488c7b7adb89b011b4aec44e01c2647c22f1d9d91d92aa17c14dbaa1b7bc9ce7fcn5d3vWDzwKCfCnKRYtG8m8A+2svUN8hIQ3JOJcN96bw=','eda15e5c1f2778f0a2b8323f0914ca8fcc530e55fef4e5d9ad4e6d214509ac3f3bcac94d55d994942c54cb9ba79fcf068bf8c8422f89d0c8b5b45e2a4a917b6b8fo6H+TYmVxHfBFhrWLw0TlJ9VfhB8+I1QBjLQN73Vo=','1653839610',0,0),
+(5,'admin@tokoproduk.com','$2y$10$31CQBgl.x.HsutNvGn6IaucdHM8tpyp4/ymL4qF7IpYm4T/QBGTYO',1,1,'0f49f2360cfbcfb6f0e033f40faff81437ba612bf45b15ebdba9497ccff2d2488c7b7adb89b011b4aec44e01c2647c22f1d9d91d92aa17c14dbaa1b7bc9ce7fcn5d3vWDzwKCfCnKRYtG8m8A+2svUN8hIQ3JOJcN96bw=','eda15e5c1f2778f0a2b8323f0914ca8fcc530e55fef4e5d9ad4e6d214509ac3f3bcac94d55d994942c54cb9ba79fcf068bf8c8422f89d0c8b5b45e2a4a917b6b8fo6H+TYmVxHfBFhrWLw0TlJ9VfhB8+I1QBjLQN73Vo=','1653839610',0,0),
 (6,'mahendradwipurwanto@gmail.com','$2y$10$wx7x9ndaPAKvB6MG.CP75uazGTc2IxW5cPP4e1bCqe4InPUEDdcsC',1,2,'c209cb53caf5e85f3bad79c9f072f32de5aaeeab1127009dd773050e493e28a55741673124cf738ad826399314b911407bc9702bd3261319aec7832c859b162bYSyyhuOvW0PrYvK/rem8JU+U8orOHN/KJLWjcY8hi/Y=','d4f0c7b20e2c7824f711481fa24f62513e91d4212ddb1556706604d1dd525b1a7bf072195e46312d5261d32aaa0bffe796edb0f0548f2f6bff2cace84ee83f7ffhuFVdQN7pmWCGA5McP4MM3KDHA+MdN+rus7WiFAZZA=','1656229761',1656229653,0);
 
 /*Table structure for table `tb_pengunjung` */
@@ -61,11 +61,11 @@ insert  into `tb_pengunjung`(`id`,`device`,`created_at`) values
 (182,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36',1656230109),
 (183,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36',1656230123);
 
-/*Table structure for table `tb_sayur` */
+/*Table structure for table `tb_produk` */
 
-DROP TABLE IF EXISTS `tb_sayur`;
+DROP TABLE IF EXISTS `tb_produk`;
 
-CREATE TABLE `tb_sayur` (
+CREATE TABLE `tb_produk` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sayur` varchar(50) DEFAULT NULL,
   `gambar` varchar(255) DEFAULT 'assets/images/placeholder.png',
@@ -77,9 +77,9 @@ CREATE TABLE `tb_sayur` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
-/*Data for the table `tb_sayur` */
+/*Data for the table `tb_produk` */
 
-insert  into `tb_sayur`(`id`,`sayur`,`gambar`,`stok`,`harga`,`keterangan`,`created_at`,`is_deleted`) values 
+insert  into `tb_produk`(`id`,`sayur`,`gambar`,`stok`,`harga`,`keterangan`,`created_at`,`is_deleted`) values 
 (9,'Kentang Segar','berkas/sayur/1656229744.jpg',5,25000,'',0,0);
 
 /*Table structure for table `tb_settings` */
@@ -99,7 +99,7 @@ CREATE TABLE `tb_settings` (
 /*Data for the table `tb_settings` */
 
 insert  into `tb_settings`(`key`,`value`,`desc`,`created_at`,`modified_at`,`is_deleted`) values 
-('mailer_alias','Toko Sayur Indonesia',NULL,1653641032,0,0),
+('mailer_alias','Toko Produk Indonesia',NULL,1653641032,0,0),
 ('mailer_host','smtp.gmail.com',NULL,1653641032,0,0),
 ('mailer_mode','0',NULL,1653641032,0,0),
 ('mailer_password','hazyzcmjpgjfjitd',NULL,1653641032,0,0),
@@ -108,7 +108,7 @@ insert  into `tb_settings`(`key`,`value`,`desc`,`created_at`,`modified_at`,`is_d
 ('web_desc','This is Base Project Template',NULL,1653641032,0,0),
 ('web_icon','favicon.ico',NULL,1653641032,0,0),
 ('web_logo','favicon.ico',NULL,1653641032,0,0),
-('web_title','Toko Sayur',NULL,1653641032,0,0);
+('web_title','Toko Produk',NULL,1653641032,0,0);
 
 /*Table structure for table `tb_user` */
 
@@ -157,17 +157,17 @@ DROP TABLE IF EXISTS `tb_wishlist_detail`;
 
 CREATE TABLE `tb_wishlist_detail` (
   `wishlist_id` int(11) DEFAULT NULL,
-  `sayur_id` int(11) DEFAULT NULL,
+  `produk_id` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
   KEY `wishlist_id` (`wishlist_id`),
-  KEY `sayur_id` (`sayur_id`),
+  KEY `produk_id` (`produk_id`),
   CONSTRAINT `tb_wishlist_detail_ibfk_1` FOREIGN KEY (`wishlist_id`) REFERENCES `tb_wishlist` (`id`),
-  CONSTRAINT `tb_wishlist_detail_ibfk_2` FOREIGN KEY (`sayur_id`) REFERENCES `tb_sayur` (`id`)
+  CONSTRAINT `tb_wishlist_detail_ibfk_2` FOREIGN KEY (`produk_id`) REFERENCES `tb_produk` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_wishlist_detail` */
 
-insert  into `tb_wishlist_detail`(`wishlist_id`,`sayur_id`,`jumlah`) values 
+insert  into `tb_wishlist_detail`(`wishlist_id`,`produk_id`,`jumlah`) values 
 (14,9,5);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

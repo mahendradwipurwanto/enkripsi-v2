@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-12 text-center">
 		<h5 class="mb-0">Temukan sayur segar pilihan yang ingin kamu inginkan</h5>
-		<h1 class="display-4 my-0 font-weight-bold">Sayur Pilihan</h1>
+		<h1 class="display-4 my-0 font-weight-bold">Produk Pilihan</h1>
 	</div>
 </div>
 <hr class="my-5">
@@ -46,7 +46,7 @@
 	<?php foreach($sayur as $val):?>
 	<div class="col-lg-6 col-xl-3">
 
-		<!-- Sayur card -->
+		<!-- Produk card -->
 		<div class="card">
 			<div class="card-sayur">
 				<img class="card-img-top img-fluid" src="<?= base_url();?><?= $val->gambar;?>" alt="Card image cap">
@@ -94,7 +94,7 @@
 						<p>Tambahkan <b><?= $val->sayur;?></b> kedalam wishlist anda, lengkapi data dibawah ini untuk
 							melanjutkan</p>
 						<div class="form-group">
-							<label for="inputNamaSayur" class="input-label">Jumlah yang diinginkan <small
+							<label for="inputNamaProduk" class="input-label">Jumlah yang diinginkan <small
 									class="text-danger">*</small></label>
 							<div class="input-group">
 								<input type="number" class="form-control" placeholder="Masukkan jumlah sayur"

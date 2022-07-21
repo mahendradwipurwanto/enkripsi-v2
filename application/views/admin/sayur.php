@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-title-box">
-			<h4 class="page-title">Kelola Data Sayur
+			<h4 class="page-title">Kelola Data Produk
 				<button type="button" class="btn btn-primary float-right" data-toggle="modal"
 					data-target="#tambah">Tambah sayur</button>
 			</h4>
@@ -10,7 +10,7 @@
 				<ol class="breadcrumb hide-phone p-0 m-0">
 					<li class="breadcrumb-item"><a href="<?= site_url('admin');?>">Dashboard</a></li>
 					<li class="breadcrumb-item"><a>Pages</a></li>
-					<li class="breadcrumb-item"><a href="<?= site_url('admin/kelola-sayur');?>">Kelola Data Sayur</a>
+					<li class="breadcrumb-item"><a href="<?= site_url('admin/kelola-sayur');?>">Kelola Data Produk</a>
 					</li>
 				</ol>
 			</div>
@@ -24,7 +24,7 @@
 	<div class="col-xl-12">
 		<div class="card">
 			<div class="card-body">
-				<h5 class="header-title pb-3 mt-0">Data Sayur</h5>
+				<h5 class="header-title pb-3 mt-0">Data Produk</h5>
 				<div class="table-responsive">
 					<table class="table table-hover table-striped dt-responsive nowrap"
 						style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatable-buttons">
@@ -32,7 +32,7 @@
 							<tr class="align-self-center">
 								<th width="5%" class="text-center">No</th>
 								<th width="10%"> </th>
-								<th>Sayur</th>
+								<th>Produk</th>
 								<th>Harga</th>
 								<th>Stok</th>
 								<th>Keterangan</th>
@@ -72,20 +72,20 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<form action="<?= site_url('admin/edit_sayur');?>" method="post" enctype="multipart/form-data">
+											<form action="<?= site_url('admin/edit_produk');?>" method="post" enctype="multipart/form-data">
 												<input type="hidden" name="id" value="<?= $val->id;?>" required>
 
 												<div class="form-group">
-													<label for="inputNamaSayur" class="input-label">Nama Sayur <small class="text-danger">*</small></label>
-													<input type="text" class="form-control" id="inputNamaSayur"
+													<label for="inputNamaProduk" class="input-label">Nama Produk <small class="text-danger">*</small></label>
+													<input type="text" class="form-control" id="inputNamaProduk"
 														name="sayur" value="<?= $val->sayur;?>" required>
 												</div>
 												<div class="form-group">
-													<label for="inputNamaSayur" class="input-label">Gambar Sayur <small class="text-secondary">(optional)</small></label>
+													<label for="inputNamaProduk" class="input-label">Gambar Produk <small class="text-secondary">(optional)</small></label>
 													<input type="file" name="image" class="form-control" >
 												</div>
 												<div class="form-group">
-													<label for="inputNamaSayur" class="input-label">Harga Sayur <small class="text-danger">*</small></label>
+													<label for="inputNamaProduk" class="input-label">Harga Produk <small class="text-danger">*</small></label>
 													<div class="input-group">
 														<div class="input-group-prepend">
 															<span class="input-group-text"
@@ -96,7 +96,7 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label for="inputNamaSayur" class="input-label">Stok Sayur <small class="text-danger">*</small></label>
+													<label for="inputNamaProduk" class="input-label">Stok Produk <small class="text-danger">*</small></label>
 													<div class="input-group">
 														<input type="number" class="form-control" name="stok" value="<?= $val->stok;?>" required>
 														<div class="input-group-append">
@@ -105,10 +105,10 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label for="inputKeteranganSayur"
+													<label for="inputKeteranganProduk"
 														class="input-label">Keterangan <small class="text-secondary">(optional)</small></label>
 													<textarea class="form-control" name="keterangan"
-														id="inputKeteranganSayur"
+														id="inputKeteranganProduk"
 														rows="5"><?= $val->keterangan;?></textarea>
 												</div>
 												<div class="modal-footer px-0 mx-0">
@@ -133,7 +133,7 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<form action="<?= site_url('admin/hapus_sayur');?>" method="post">
+											<form action="<?= site_url('admin/hapus_produk');?>" method="post">
 												<input type="hidden" name="id" value="<?= $val->id;?>" required>
 												<p>Apakah anda yakin ingin menghapus sayur, <b>Kentang</b>?</p>
 												<div class="modal-footer px-0 mx-0">
@@ -189,18 +189,18 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="<?= site_url('admin/tambah_sayur');?>" method="post" enctype="multipart/form-data">
+				<form action="<?= site_url('admin/tambah_produk');?>" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<label for="inputNamaSayur" class="input-label">Nama Sayur <small class="text-danger">*</small></label>
-						<input type="text" class="form-control" id="inputNamaSayur" name="sayur"
+						<label for="inputNamaProduk" class="input-label">Nama Produk <small class="text-danger">*</small></label>
+						<input type="text" class="form-control" id="inputNamaProduk" name="sayur"
 							placeholder="Masukkan nama sayur" required>
 					</div>
 					<div class="form-group">
-						<label for="inputNamaSayur" class="input-label">Gambar Sayur <small class="text-secondary">(optional)</small></label>
+						<label for="inputNamaProduk" class="input-label">Gambar Produk <small class="text-secondary">(optional)</small></label>
 						<input type="file" id="input-file-now" name="image" class="dropify">
 					</div>
 					<div class="form-group">
-						<label for="inputNamaSayur" class="input-label">Harga Sayur <small class="text-danger">*</small></label>
+						<label for="inputNamaProduk" class="input-label">Harga Produk <small class="text-danger">*</small></label>
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="inputGroup-sizing-lg">Rp.</span>
@@ -209,7 +209,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputNamaSayur" class="input-label">Stok Sayur <small class="text-danger">*</small></label>
+						<label for="inputNamaProduk" class="input-label">Stok Produk <small class="text-danger">*</small></label>
 						<div class="input-group">
 							<input type="number" class="form-control" name="stok" placeholder="Masukkan stok sayur" required>
 							<div class="input-group-append">
@@ -218,8 +218,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputKeteranganSayur" class="input-label">Keterangan <small class="text-secondary">(optional)</small></label>
-						<textarea class="form-control" name="keterangan" id="inputKeteranganSayur" rows="5"></textarea>
+						<label for="inputKeteranganProduk" class="input-label">Keterangan <small class="text-secondary">(optional)</small></label>
+						<textarea class="form-control" name="keterangan" id="inputKeteranganProduk" rows="5"></textarea>
 					</div>
 					<div class="modal-footer px-0 mx-0">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

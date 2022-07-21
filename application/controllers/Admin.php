@@ -43,19 +43,19 @@ class Admin extends CI_Controller
         $this->templatefront->view('admin/pengguna', $data);
     }
 
-    public function kelola_sayur()
+    public function kelola_produk()
     {
-        $data['sayur'] = $this->M_admin->get_sayur();
+        $data['sayur'] = $this->M_admin->get_sproduk);
         $this->templatefront->view('admin/sayur', $data);
     }
 
-    function tambah_sayur(){
+    function tambah_produk(){
         if (isset($_FILES['image'])) {
             $path = "berkas/sayur/";
             $upload = $this->uploader->uploadImage($_FILES['image'], $path);
             // ej($upload);
             if ($upload == true) {
-                if ($this->M_admin->tambah_sayur($upload['filename']) == true) {
+                if ($this->M_admin->tambah_produk($upload['filename']) == true) {
 
                     $this->session->set_flashdata('notif_success', 'Berhasil menambahkan data sayur');
                     redirect($this->agent->referrer());
@@ -68,7 +68,7 @@ class Admin extends CI_Controller
                 redirect(site_url('admin/kelola-sayur'));
             }
         } else {
-            if ($this->M_admin->tambah_sayur(null) == true) {
+            if ($this->M_admin->tambah_produk(null) == true) {
                 $this->session->set_flashdata('notif_success', 'Berhasil menambahkan data sayur');
                 redirect($this->agent->referrer());
             } else {
@@ -78,13 +78,13 @@ class Admin extends CI_Controller
         }
     }
 
-    function edit_sayur(){
+    function edit_produk(){
         if (isset($_FILES['image'])) {
             $path = "berkas/sayur/";
             $upload = $this->uploader->uploadImage($_FILES['image'], $path);
             // ej($upload);
             if ($upload == true) {
-                if ($this->M_admin->edit_sayur($upload['filename']) == true) {
+                if ($this->M_admin->edit_produk($upload['filename']) == true) {
 
                     $this->session->set_flashdata('notif_success', 'Berhasil mengubah data sayur');
                     redirect($this->agent->referrer());
@@ -97,7 +97,7 @@ class Admin extends CI_Controller
                 redirect(site_url('admin/kelola-sayur'));
             }
         } else {
-            if ($this->M_admin->edit_sayur(null) == true) {
+            if ($this->M_admin->edit_produk(null) == true) {
                 $this->session->set_flashdata('notif_success', 'Berhasil menambahkan data sayur');
                 redirect($this->agent->referrer());
             } else {
@@ -108,8 +108,8 @@ class Admin extends CI_Controller
         }
     }
 
-    function hapus_sayur(){
-        if ($this->M_admin->hapus_sayur() == true) {
+    function hapus_produk(){
+        if ($this->M_admin->hapus_produk() == true) {
             $this->session->set_flashdata('notif_success', 'Berhasil menghapus data sayur');
             redirect($this->agent->referrer());
         } else {

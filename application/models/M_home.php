@@ -17,9 +17,9 @@ class M_home extends CI_Model
         $this->db->insert('tb_pengunjung', $data);
     }
 
-    function get_sayurHome($cari = null){
+    function get_produkHome($cari = null){
         $this->db->select('a.*');
-        $this->db->from('tb_sayur a');
+        $this->db->from('tb_produk a');
         $this->db->where('a.is_deleted', 0);
         if($cari != null){
             $this->db->like('sayur', $cari);
@@ -29,8 +29,8 @@ class M_home extends CI_Model
         return $this->db->get()->result();
     }
 
-    function cek_sayur($id){
-        $cek = $this->db->get_where('tb_sayur', ['is_deleted' => 0, 'id' => $id])->num_rows();
+    function cek_produk($id){
+        $cek = $this->db->get_where('tb_produk', ['is_deleted' => 0, 'id' => $id])->num_rows();
         if($cek > 0){
             return true;
         }else{
@@ -48,8 +48,8 @@ class M_home extends CI_Model
         }
     }
 
-    function get_sayur($id, $jumlah){
-        $sayur = $this->db->get_where('tb_sayur', ['id' => $id])->row();
+    function get_produk($id, $jumlah){
+        $sayur = $this->db->get_where('tb_sproduk, ['id' => $id])->row();
 
         if(isset($sayur)){
             if($sayur->stok > $jumlah){
@@ -62,12 +62,12 @@ class M_home extends CI_Model
         }
     }
 
-    function updateJumlahSayur($id, $jumlah){
-        $sayur = $this->db->get_where('tb_sayur', ['id' => $id])->row();
+    function updateJumlahProduk($id, $jumlah){
+        $sayur = $this->db->get_where('tb_sproduk, ['id' => $id])->row();
 
         $stok_baru = $sayur->stok-$jumlah;
         $this->db->where('id', $id);
-        $this->db->update('tb_sayur', ['stok' => $stok_baru]);
+        $this->db->update('tb_produk', ['stok' => $stok_baru]);
     }
 
 
@@ -89,7 +89,7 @@ class M_home extends CI_Model
             $arrDetail = [
                 'wishlist_id' => $wish_id,
                 'jumlah' => $val['jumlah'],
-                'sayur_id' => $val['sayur_id']
+                'produk_id' => $val['produk_id']
             ];
 
             $this->db->insert('tb_wishlist_detail', $arrDetail);

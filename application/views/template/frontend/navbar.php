@@ -129,7 +129,7 @@
 
 					<li class="has-submenu">
 						<a href="<?= site_url('admin/kelola-sayur');?>"><i class="dripicons-to-do"></i>Kelola Data
-							Sayur</a>
+							Produk</a>
 					</li>
 
 					<li class="has-submenu">
@@ -161,16 +161,16 @@
 				<form action="<?= site_url('home/tambah_wishlist');?>" method="post" enctype="multipart/form-data">
 					<p>Tambahkan <b><?= count($this->session->userdata('keranjang'));?></b> item kedalam
 						wishlist anda?</p>
-					<h6>Sayur anda:</h6>
+					<h6>Produk anda:</h6>
 					<ul>
 						<?php foreach ($this->session->userdata('keranjang') as $val):?>
 						<li><?= $val['sayur'];?> + <?= $val['jumlah'];?> buah</li>
 						<?php endforeach;?>
 					</ul>
 					<div class="form-group">
-						<label for="inputKeteranganSayur" class="input-label">Tambahkan catatan <small
+						<label for="inputKeteranganProduk" class="input-label">Tambahkan catatan <small
 								class="text-secondary">(optional)</small></label>
-						<textarea class="form-control" name="catatan" id="inputKeteranganSayur" name="catatan"
+						<textarea class="form-control" name="catatan" id="inputKeteranganProduk" name="catatan"
 							rows="5"></textarea>
 					</div>
 					<div class="modal-footer px-0 mx-0 mb-0 pb-0">

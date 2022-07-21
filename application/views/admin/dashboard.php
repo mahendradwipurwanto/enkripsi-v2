@@ -44,7 +44,7 @@
 								</div>
 								<div class="col-10 text-right">
 									<h5 class="mt-0 mb-1"><?= number_format($statistik['sayur']);?></h5>
-									<p class="mb-0 font-12 text-muted">Total Sayur</p>
+									<p class="mb-0 font-12 text-muted">Total Produk</p>
 								</div>
 							</div>
 						</div>
@@ -135,7 +135,7 @@
 											<div class="modal-body p-4">
 												<dl class="row mb-0">
 													<?php foreach($val['keranjang'] as $item):?>
-													<dt class="col-sm-3">Sayur</dt>
+													<dt class="col-sm-3">Produk</dt>
 													<dd class="col-sm-9"><?= $item->sayur;?> - <?= number_format($item->jumlah);?> buah</dd>
 													<?php endforeach;?>
 													<hr>

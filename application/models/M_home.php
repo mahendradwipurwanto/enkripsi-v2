@@ -49,7 +49,7 @@ class M_home extends CI_Model
     }
 
     function get_produk($id, $jumlah){
-        $sayur = $this->db->get_where('tb_sproduk, ['id' => $id])->row();
+        $sayur = $this->db->get_where('tb_produk', ['id' => $id])->row();
 
         if(isset($sayur)){
             if($sayur->stok > $jumlah){
@@ -63,7 +63,7 @@ class M_home extends CI_Model
     }
 
     function updateJumlahProduk($id, $jumlah){
-        $sayur = $this->db->get_where('tb_sproduk, ['id' => $id])->row();
+        $sayur = $this->db->get_where('tb_produk', ['id' => $id])->row();
 
         $stok_baru = $sayur->stok-$jumlah;
         $this->db->where('id', $id);

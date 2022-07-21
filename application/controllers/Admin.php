@@ -45,7 +45,7 @@ class Admin extends CI_Controller
 
     public function kelola_produk()
     {
-        $data['sayur'] = $this->M_admin->get_sproduk);
+        $data['sayur'] = $this->M_admin->get_produk();
         $this->templatefront->view('admin/sayur', $data);
     }
 

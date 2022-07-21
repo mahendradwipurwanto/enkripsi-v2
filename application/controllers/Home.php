@@ -24,9 +24,9 @@ class Home extends CI_Controller
         // $this->session->unset_userdata('keranjang');
         $this->add_pengunjung();
         if($this->input->get('cari')){
-            $data['sayur'] = $this->M_home->get_sprodukome($this->input->get('cari'));
+            $data['sayur'] = $this->M_home->get_produkome($this->input->get('cari'));
         }else{
-            $data['sayur'] = $this->M_home->get_sprodukome();
+            $data['sayur'] = $this->M_home->get_produkome();
         }
         $this->templatefront->view('home/home', $data);
     }

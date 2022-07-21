@@ -12,7 +12,7 @@ class M_admin extends CI_Model
     function get_statistik(){
 
         $pengguna = $this->db->get_where('tb_auth', ['role' => 2, 'is_deleted' => 0])->num_rows();
-        $sayur = $this->db->get_where('tb_sproduk, ['is_deleted' => 0])->num_rows();
+        $sayur = $this->db->get_where('tb_produk', ['is_deleted' => 0])->num_rows();
         $wishlist = $this->db->get_where('tb_wishlist', ['is_deleted' => 0])->num_rows();
         $pengunjung = $this->db->get('tb_pengunjung')->num_rows();
 

@@ -1891,7 +1891,7 @@ INSERT INTO `tb_pengunjung` (`id`, `device`, `created_at`) VALUES
 
 CREATE TABLE `tb_produk` (
   `id` int(11) NOT NULL,
-  `sayur` varchar(50) DEFAULT NULL,
+  `produk` varchar(50) DEFAULT NULL,
   `gambar` varchar(255) DEFAULT 'assets/images/placeholder.png',
   `harga` int(20) DEFAULT NULL,
   `stok` int(20) DEFAULT '0',
@@ -1904,10 +1904,10 @@ CREATE TABLE `tb_produk` (
 -- Dumping data untuk tabel `tb_produk`
 --
 
-INSERT INTO `tb_produk` (`id`, `sayur`, `gambar`, `harga`, `stok`, `keterangan`, `created_at`, `is_deleted`) VALUES
-(8, 'Wortel', 'berkas/sayur/1656230601.jpg', 25000, 8, '', 0, 0),
-(9, 'Kentang Segar', 'berkas/sayur/1656230554.jpg', 250000, 25, '', 0, 0),
-(10, 'bit', 'berkas/sayur/1653952633.jpg', 36000, 20, 'harga per kg', 0, 0);
+INSERT INTO `tb_produk` (`id`, `produk`, `gambar`, `harga`, `stok`, `keterangan`, `created_at`, `is_deleted`) VALUES
+(8, 'Wortel', 'berkas/produk/1656230601.jpg', 25000, 8, '', 0, 0),
+(9, 'Kentang Segar', 'berkas/produk/1656230554.jpg', 250000, 25, '', 0, 0),
+(10, 'bit', 'berkas/produk/1653952633.jpg', 36000, 20, 'harga per kg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1966,10 +1966,10 @@ INSERT INTO `tb_user` (`user_id`, `nama`, `profil`, `no_telp`, `alamat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_wishlist`
+-- Struktur dari tabel `tb_checkout`
 --
 
-CREATE TABLE `tb_wishlist` (
+CREATE TABLE `tb_checkout` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `catatan` text,
@@ -1979,10 +1979,10 @@ CREATE TABLE `tb_wishlist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `tb_wishlist`
+-- Dumping data untuk tabel `tb_checkout`
 --
 
-INSERT INTO `tb_wishlist` (`id`, `user_id`, `catatan`, `status`, `created_at`, `is_deleted`) VALUES
+INSERT INTO `tb_checkout` (`id`, `user_id`, `catatan`, `status`, `created_at`, `is_deleted`) VALUES
 (12, 3, NULL, 1, 1653881815, 0),
 (13, 3, NULL, 1, 1653883321, 0),
 (14, 6, '', 1, 1653952908, 0),
@@ -1992,20 +1992,20 @@ INSERT INTO `tb_wishlist` (`id`, `user_id`, `catatan`, `status`, `created_at`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_wishlist_detail`
+-- Struktur dari tabel `tb_checkout_detail`
 --
 
-CREATE TABLE `tb_wishlist_detail` (
-  `wishlist_id` int(11) DEFAULT NULL,
+CREATE TABLE `tb_checkout_detail` (
+  `checkout_id` int(11) DEFAULT NULL,
   `produk_id` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `tb_wishlist_detail`
+-- Dumping data untuk tabel `tb_checkout_detail`
 --
 
-INSERT INTO `tb_wishlist_detail` (`wishlist_id`, `produk_id`, `jumlah`) VALUES
+INSERT INTO `tb_checkout_detail` (`checkout_id`, `produk_id`, `jumlah`) VALUES
 (11, 8, 25),
 (11, 8, 5),
 (12, 8, 25),
@@ -2044,9 +2044,9 @@ ALTER TABLE `tb_settings`
   ADD PRIMARY KEY (`key`);
 
 --
--- Indeks untuk tabel `tb_wishlist`
+-- Indeks untuk tabel `tb_checkout`
 --
-ALTER TABLE `tb_wishlist`
+ALTER TABLE `tb_checkout`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2072,9 +2072,9 @@ ALTER TABLE `tb_produk`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_wishlist`
+-- AUTO_INCREMENT untuk tabel `tb_checkout`
 --
-ALTER TABLE `tb_wishlist`
+ALTER TABLE `tb_checkout`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 

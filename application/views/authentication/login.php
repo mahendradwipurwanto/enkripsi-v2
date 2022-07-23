@@ -1,45 +1,50 @@
-<div class="card">
-	<div class="card-body">
+<div class="row">
+	<div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+	<div class="login-brand mb-3">
+		<img src="<?= base_url();?>assets/images/logo.png" alt="logo" width="100" class="shadow-light logo-brand">
+	</div>
 
-		<div class="text-center m-b-15">
-			<a href="<?= base_url();?>" class="logo logo-admin"><img src="<?= base_url();?>assets/images/logo.png"
-					height="50" alt="logo"></a>
+	<div class="card card-primary">
+		<div class="card-header"><h4>Login</h4></div>
+
+		<div class="card-body">
+		<form method="POST" action="<?= site_url('authentication/proses_login');?>" class="needs-validation" novalidate="">
+			<div class="form-group">
+			<label for="email">Email</label>
+			<input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+			<div class="invalid-feedback">
+				Harap masukkan email dengan benar
+			</div>
+			</div>
+
+			<div class="form-group">
+			<div class="d-block">
+				<label for="password" class="control-label">Password</label>
+				<div class="float-right">
+				<a href="<?= site_url('lupa-password');?>" class="text-small">
+					Lupa password?
+				</a>
+				</div>
+			</div>
+			<input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+			<div class="invalid-feedback">
+				Harap masukkan password anda
+			</div>
+			</div>
+
+			<div class="form-group">
+			<button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" id="submit-button">
+				Masuk
+			</button>
+			</div>
+		</form>
 		</div>
-
-		<div class="p-3">
-			<form class="form-horizontal m-t-20" action="<?= site_url('authentication/proses_login');?>"
-				method="post">
-
-				<div class="form-group row">
-					<div class="col-12">
-						<input class="form-control" type="email" name="email" required placeholder="Masukkan email">
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<div class="col-12">
-						<input class="form-control" type="password" name="password" required
-							placeholder="Masukkan password">
-					</div>
-				</div>
-
-				<div class="form-group text-center row m-t-20">
-					<div class="col-12">
-						<button class="btn btn-danger btn-block waves-effect waves-light" type="submit" id="send-button">Login</button>
-					</div>
-				</div>
-
-				<div class="form-group m-t-10 mb-0 row">
-					<div class="col-sm-7 m-t-20">
-						<a href="<?= site_url('lupa-password');?>" class="text-muted"><i class="mdi mdi-lock"></i>
-							<small>Lupa password ?</small></a>
-					</div>
-					<div class="col-sm-5 m-t-20"><a href="<?= site_url('register');?>" class="text-muted"><i
-								class="mdi mdi-account-circle"></i> <small>Daftar</small></a>
-					</div>
-				</div>
-			</form>
-		</div>
-
+	</div>
+	<div class="mt-5 text-muted text-center">
+		Belum punya akun? <a href="<?= site_url('register');?>">Buat sekarang</a>
+	</div>
+	<div class="simple-footer">
+		Copyright &copy; <?= $web_title;?>
+	</div>
 	</div>
 </div>

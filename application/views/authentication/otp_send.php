@@ -16,36 +16,35 @@ function mask($str, $first, $last)
 }
 ?>
 
-<div class="card">
-	<div class="card-header">
-		<h5 class="card-header-title">Verifikasi OTP</h5>
-	</div>
-	<div class="card-body">
-
-		<div class="text-center m-b-15">
-			<a href="<?= base_url();?>" class="logo logo-admin"><img src="<?= base_url();?>assets/images/logo.png"
-					height="50" alt="logo"></a>
+<div class="row">
+	<div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
+		<div class="login-brand mb-3">
+			<img src="<?= base_url();?>assets/images/logo.png" alt="logo" width="100" class="shadow-light logo-brand">
 		</div>
 
-		<div class="p-3">
-			<center>Tekan tombol dibawah ini untuk menerima kode OTP sebelum login melalui akun email anda.</center>
+		<div class="card card-primary">
+			<div class="card-header">
+				<h4>Verifikasi OTP</h4>
+			</div>
 
-			<div class="form-group row">
-				<div class="col-12">
-					<input class="form-control" type="email" name="email" required
-						value="<?= $this->session->userdata('email');?>" readonly>
+			<div class="card-body">
+				<h6 class="font-weight-light">Tekan tombol dibawah ini untuk menerima kode OTP sebelum login melalui
+					akun email anda.</h6>
+
+				<div class="form-group">
+					<a href="<?= site_url('send-otp/email'); ?>" class="btn btn-primary btn-lg btn-block" tabindex="4"
+						id="submit-button">
+						Kirim kode OTP
+						(<?= mask_email($this->session->userdata('email')); ?>)
+					</a>
 				</div>
 			</div>
-
-			<div class="mt-3 text-center">
-				<a href="<?= site_url('send-otp/email'); ?>" class="btn btn-primary" id="send-button">Kirim kode OTP
-					(<?= mask_email($this->session->userdata('email')); ?>)</a>
-			</div>
-
-			<div class="text-center mt-4 font-weight-light">
-				Ganti akun? <a href="<?= site_url('logout'); ?>" class="text-primary">Keluar</a>
-			</div>
 		</div>
-
+		<div class="mt-5 text-muted text-center">
+			Ganti akun? <a href="<?= site_url('logout'); ?>" class="text-primary">Keluar</a>
+		</div>
+		<div class="simple-footer">
+			Copyright &copy; <?= $web_title;?>
+		</div>
 	</div>
 </div>

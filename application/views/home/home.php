@@ -1,11 +1,7 @@
 <!-- Hero -->
-<div class="row">
-	<div class="col-12 text-center">
-		<h5 class="mb-0">Temukan sayur segar pilihan yang ingin kamu inginkan</h5>
-		<h1 class="display-4 my-0 font-weight-bold">Produk Pilihan</h1>
-	</div>
+<div class="section-header">
+	<h1>Temukan produk pilihan yang kamu inginkan</h1>
 </div>
-<hr class="my-5">
 <!-- Pencarian -->
 <div class="row justify-content-center mb-5">
 	<div class="col-6">
@@ -28,60 +24,68 @@
 			</div>
 		</form>
 		<?php if($this->input->get('cari')):?>
-		<span class="mt-5">Menemukan <?= count($sayur);?> sayur dari pencarian</span>
+		<span class="mt-5">Menemukan <?= count($produk);?> produk dari pencarian</span>
 		<?php endif;?>
 	</div>
 </div>
 
 <!-- Content -->
 <div class="row justify-content-center">
-	<?php if(empty($sayur)):?>
+	<?php if(empty($produk)):?>
 	<?php if($this->input->get('cari')):?>
-	<h5 class="text-cente font-weight-normal">Tidak dapat menemukan sayur dengan kata kunci
+	<h5 class="text-cente font-weight-normal">Tidak dapat menemukan produk dengan kata kunci
 		<b class="text-primary"><?= $this->input->get('cari');?></b></h5>
 	<?php else:?>
-	<h3 class="text-center">Belum ada sayur</h3>
+	<h3 class="text-center">Belum ada produk</h3>
 	<?php endif;?>
 	<?php else:?>
-	<?php foreach($sayur as $val):?>
-	<div class="col-lg-6 col-xl-3">
+	<?php foreach($produk as $val):?>
 
-		<!-- Produk card -->
-		<div class="card">
-			<div class="card-sayur">
-				<img class="card-img-top img-fluid" src="<?= base_url();?><?= $val->gambar;?>" alt="Card image cap">
+	<div class="col-12 col-sm-6 col-md-6 col-lg-3">
+		<article class="article article-style-b">
+			<div class="article-header">
+				<div class="article-image" data-background="<?= base_url();?><?= $val->gambar;?>">
+				</div>
+				<?php if($val->stok > 0):?>
+				<div class="article-title">
+					<h2 class="text-white mb-0"><span>Rp. <?= number_format($val->harga);?></span><span
+							class="float-right">stok: <?= number_format($val->stok);?></span></h2>
+				</div>
+				<?php else:?>
+				<div class="article-badge">
+					<div class="article-badge-item bg-danger"><i class="fas fa-fire"></i> Habis terjual</div>
+				</div>
+				<?php endif;?>
 			</div>
-			<?php if($this->session->userdata('logged_in') == false || !$this->session->userdata('logged_in')):?>
-			<a href="<?= site_url('login');?>" class="btn btn-primary btn-sm waves-effect waves-light"
-				data-toggle="tooltip" data-placement="top" title="" data-original-title="Tambahkan ke keranjang"><i
-					class="dripicons-cart mr-2"></i> Tambahkan ke keranjang</a>
-			<?php else:?>
-			<?php if($this->session->userdata('role') == 2):?>
-			<button type="button" class="btn btn-primary btn-sm waves-effect waves-light" data-toggle="modal"
-				data-target="#tambah-wishlist-<?= $val->id;?>"><i class="dripicons-cart mr-2"></i>Tambahkan ke
-				keranjang</button>
-			<?php else:?>
-			<a href="<?= site_url('logout');?>" class="btn btn-primary btn-sm waves-effect waves-light"><i
-					class="dripicons-cart mr-2"></i>Login ke akun pengguna</a>
-			<?php endif;?>
-			<?php endif;?>
-			<div class="card-body">
-				<h4 class="card-title font-20 mt-0"><?= $val->sayur;?></h4>
-				<p class="font-13 text-muted"><?= $val->keterangan;?></p>
-				<hr>
-				<h5 class="mb-0"><span class="h6">stok: <?= number_format($val->stok);?></span><span
-						class="float-right pull-right">Rp. <?= number_format($val->harga);?></span></h5>
+			<div class="article-details p-3">
+				<div class="article-title">
+					<h2><a><?= $val->produk;?></a></h2>
+				</div>
+				<p><?= $val->keterangan;?></p>
+				<div class="article-cta text-center">
+					<?php if($val->stok > 0):?>
+					<?php if($this->session->userdata('logged_in') == false || !$this->session->userdata('logged_in')):?>
+					<a href="<?= site_url('login');?>" class="btn btn-primary btn-sm">Tambahkan ke keranjang</a>
+					<?php else:?>
+					<?php if($this->session->userdata('role') == 2):?>
+					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+						data-target="#tambah-checkout-<?= $val->id;?>">Tambahkan ke keranjang</button>
+					<?php else:?>
+					<a href="<?= site_url('logout');?>" class="btn btn-primary btn-sm">Login ke akun pengguna</a>
+					<?php endif;?>
+					<?php endif;?>
+					<?php endif;?>
+				</div>
 			</div>
-		</div>
+		</article>
+	</div>
 
-	</div><!-- end col -->
-
-	<div id="tambah-wishlist-<?= $val->id;?>" class="modal fade" tabindex="-1" role="dialog"
+	<div id="tambah-checkout-<?= $val->id;?>" class="modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah wishlist</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Tambah checkout</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -89,15 +93,15 @@
 				<div class="modal-body p-4">
 					<form action="<?= site_url('home/add_cartWish');?>" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="id" value="<?= $val->id;?>" required>
-						<input type="hidden" name="sayur" value="<?= $val->sayur;?>" required>
+						<input type="hidden" name="produk" value="<?= $val->produk;?>" required>
 						<input type="hidden" name="gambar" value="<?= base_url();?><?= $val->gambar;?>" required>
-						<p>Tambahkan <b><?= $val->sayur;?></b> kedalam wishlist anda, lengkapi data dibawah ini untuk
+						<p>Tambahkan <b><?= $val->produk;?></b> kedalam checkout anda, lengkapi data dibawah ini untuk
 							melanjutkan</p>
 						<div class="form-group">
 							<label for="inputNamaProduk" class="input-label">Jumlah yang diinginkan <small
 									class="text-danger">*</small></label>
 							<div class="input-group">
-								<input type="number" class="form-control" placeholder="Masukkan jumlah sayur"
+								<input type="number" class="form-control" placeholder="Masukkan jumlah produk"
 									name="jumlah" required>
 								<div class="input-group-append">
 									<span class="input-group-text" id="inputGroup-sizing-lg">buah</span>
@@ -106,7 +110,7 @@
 						</div>
 						<div class="modal-footer px-0 mx-0">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-							<button type="submit" class="btn btn-primary">Tambahkan wishlist</button>
+							<button type="submit" class="btn btn-primary">Tambahkan keranjang</button>
 						</div>
 					</form>
 				</div>

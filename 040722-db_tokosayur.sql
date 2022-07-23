@@ -67,7 +67,7 @@ DROP TABLE IF EXISTS `tb_produk`;
 
 CREATE TABLE `tb_produk` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sayur` varchar(50) DEFAULT NULL,
+  `produk` varchar(50) DEFAULT NULL,
   `gambar` varchar(255) DEFAULT 'assets/images/placeholder.png',
   `stok` int(20) NOT NULL DEFAULT 0,
   `harga` int(20) DEFAULT NULL,
@@ -79,8 +79,8 @@ CREATE TABLE `tb_produk` (
 
 /*Data for the table `tb_produk` */
 
-insert  into `tb_produk`(`id`,`sayur`,`gambar`,`stok`,`harga`,`keterangan`,`created_at`,`is_deleted`) values 
-(9,'Kentang Segar','berkas/sayur/1656229744.jpg',5,25000,'',0,0);
+insert  into `tb_produk`(`id`,`produk`,`gambar`,`stok`,`harga`,`keterangan`,`created_at`,`is_deleted`) values 
+(9,'Kentang Segar','berkas/produk/1656229744.jpg',5,25000,'',0,0);
 
 /*Table structure for table `tb_settings` */
 
@@ -130,11 +130,11 @@ insert  into `tb_user`(`user_id`,`nama`,`profil`,`no_telp`,`alamat`) values
 (5,'Ngodingin Indonesia','assets/images/profile.png','085785111746',NULL),
 (6,'Mahendra Dwi Purwanto','assets/images/profile.png','085785111746',NULL);
 
-/*Table structure for table `tb_wishlist` */
+/*Table structure for table `tb_checkout` */
 
-DROP TABLE IF EXISTS `tb_wishlist`;
+DROP TABLE IF EXISTS `tb_checkout`;
 
-CREATE TABLE `tb_wishlist` (
+CREATE TABLE `tb_checkout` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `catatan` text DEFAULT NULL,
@@ -143,31 +143,31 @@ CREATE TABLE `tb_wishlist` (
   `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `tb_wishlist_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_auth` (`user_id`)
+  CONSTRAINT `tb_checkout_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_auth` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
-/*Data for the table `tb_wishlist` */
+/*Data for the table `tb_checkout` */
 
-insert  into `tb_wishlist`(`id`,`user_id`,`catatan`,`status`,`created_at`,`is_deleted`) values 
+insert  into `tb_checkout`(`id`,`user_id`,`catatan`,`status`,`created_at`,`is_deleted`) values 
 (14,6,'test',1,1656230123,0);
 
-/*Table structure for table `tb_wishlist_detail` */
+/*Table structure for table `tb_checkout_detail` */
 
-DROP TABLE IF EXISTS `tb_wishlist_detail`;
+DROP TABLE IF EXISTS `tb_checkout_detail`;
 
-CREATE TABLE `tb_wishlist_detail` (
-  `wishlist_id` int(11) DEFAULT NULL,
+CREATE TABLE `tb_checkout_detail` (
+  `checkout_id` int(11) DEFAULT NULL,
   `produk_id` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
-  KEY `wishlist_id` (`wishlist_id`),
+  KEY `checkout_id` (`checkout_id`),
   KEY `produk_id` (`produk_id`),
-  CONSTRAINT `tb_wishlist_detail_ibfk_1` FOREIGN KEY (`wishlist_id`) REFERENCES `tb_wishlist` (`id`),
-  CONSTRAINT `tb_wishlist_detail_ibfk_2` FOREIGN KEY (`produk_id`) REFERENCES `tb_produk` (`id`)
+  CONSTRAINT `tb_checkout_detail_ibfk_1` FOREIGN KEY (`checkout_id`) REFERENCES `tb_checkout` (`id`),
+  CONSTRAINT `tb_checkout_detail_ibfk_2` FOREIGN KEY (`produk_id`) REFERENCES `tb_produk` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `tb_wishlist_detail` */
+/*Data for the table `tb_checkout_detail` */
 
-insert  into `tb_wishlist_detail`(`wishlist_id`,`produk_id`,`jumlah`) values 
+insert  into `tb_checkout_detail`(`checkout_id`,`produk_id`,`jumlah`) values 
 (14,9,5);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

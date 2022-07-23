@@ -24,9 +24,9 @@ class Home extends CI_Controller
         // $this->session->unset_userdata('keranjang');
         $this->add_pengunjung();
         if($this->input->get('cari')){
-            $data['sayur'] = $this->M_home->get_produkome($this->input->get('cari'));
+            $data['produk'] = $this->M_home->get_produkHome($this->input->get('cari'));
         }else{
-            $data['sayur'] = $this->M_home->get_produkome();
+            $data['produk'] = $this->M_home->get_produkHome();
         }
         $this->templatefront->view('home/home', $data);
     }
@@ -66,13 +66,13 @@ class Home extends CI_Controller
             
 
             $produk_id = $this->input->post('id');
-            $sayur = $this->input->post('sayur');
+            $produk = $this->input->post('produk');
             $gambar = $this->input->post('gambar');
             $jumlah = $this->input->post('jumlah');
 
             $new_cart = [
                 'produk_id' => $produk_id,
-                'sayur' => $sayur,
+                'produk' => $produk,
                 'gambar' => $gambar,
                 'jumlah' => $jumlah
             ];
@@ -83,7 +83,7 @@ class Home extends CI_Controller
             
             $this->session->set_userdata(['keranjang' => $cart]);
             // ej($this->session->userdata('keranjang'));
-            $this->session->set_flashdata('notif_success', 'Berhasil menambahkan sayur ke keranjang anda !');
+            $this->session->set_flashdata('notif_success', 'Berhasil menambahkan produk ke keranjang anda !');
             redirect($this->agent->referrer());
         }else{
             $this->session->set_flashdata('notif_warning', 'Jumlah permintaan anda melebihi stok yang tersedia !');
@@ -93,7 +93,7 @@ class Home extends CI_Controller
 
     }
 
-    public function tambah_wishlist(){
+    public function tambah_checkout(){
         if ($this->session->userdata('logged_in') == false || !$this->session->userdata('logged_in')) {
             if (!empty($_SERVER['QUERY_STRING'])) {
                 $uri = uri_string() . '?' . $_SERVER['QUERY_STRING'];
@@ -118,12 +118,12 @@ class Home extends CI_Controller
             redirect(site_url('otp'));
         }
 
-        if ($this->M_home->tambah_wishlist() == true) {
+        if ($this->M_home->tambah_checkout() == true) {
             $this->session->unset_userdata('keranjang');
-            $this->session->set_flashdata('notif_success', 'Berhasil menambahkan sayur ke wishlist anda');
+            $this->session->set_flashdata('notif_success', 'Berhasil menambahkan produk ke checkout anda');
             redirect($this->agent->referrer());
         } else {
-            $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba menambahkan sayur ke wishlist anda. Coba lagi nanti !');
+            $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba menambahkan produk ke checkout anda. Coba lagi nanti !');
             redirect($this->agent->referrer());
         }
     }

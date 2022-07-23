@@ -58,6 +58,7 @@ class Authentication extends CI_Controller
                     'email' => $user->email,
                     'no_telp' => $user->no_telp,
                     'role'      => $user->role,
+                    'login_time' => date('H:i'),
                     'logged_in' => true,
                 );
 

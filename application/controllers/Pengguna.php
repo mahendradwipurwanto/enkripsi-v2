@@ -33,7 +33,7 @@ class Pengguna extends CI_Controller
 
     public function index()
     {
-        $data['wishlist'] = $this->M_pengguna->get_wishlistPengguna($this->session->userdata('user_id'));
+        $data['checkout'] = $this->M_pengguna->get_checkoutPengguna($this->session->userdata('user_id'));
 
         $this->templatefront->view('pengguna/dashboard', $data);
     }

@@ -1,181 +1,136 @@
-<!-- Navigation Bar-->
-<header id="topnav">
-	<div class="topbar-main">
-		<div class="container-fluid">
-
-			<!-- Logo container-->
-			<div class="logo">
-				<a href="<?= base_url();?>" class="logo">
-					<i class="mdi mdi-bowling text-success mr-1"></i> <span class="hide-phone"><?= $web_title;?></span>
-				</a>
-
-			</div>
-
-			<div class="menu-extras topbar-custom">
-
-				<ul class="list-inline float-right mb-0">
-					<?php if($this->session->userdata('logged_in') == true):?>
-					<?php if($this->session->userdata('role') == 2):?>
-					<!-- notification-->
-					<li class="list-inline-item dropdown notification-list">
-						<a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#"
-							role="button" aria-haspopup="false" aria-expanded="false">
-							<i class="dripicons-cart noti-icon"></i>
-							<?php if($this->session->userdata('keranjang')):?>
-							<span
-								class="badge badge-success noti-icon-badge"><?= count($this->session->userdata('keranjang'));?></span>
-							<?php endif;?>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg border-0">
-							<?php if($this->session->userdata('keranjang')):?>
-							<!-- item-->
-							<div class="dropdown-item noti-title">
-								<h5>Keranjang (<?= count($this->session->userdata('keranjang'));?>)</h5>
-							</div>
-							<?php foreach($this->session->userdata('keranjang') as $val):?>
-							<!-- item-->
-							<a href="javascript:void(0);" class="dropdown-item notify-item">
-								<div class="notify-icon bg-success"><i class="mdi mdi-cart-outline"></i></div>
-								<p class="notify-details"><b><?= $val['sayur'];?></b><small
-										class="text-muted">Menambahkan <?= $val['jumlah'];?> <?= $val['sayur'];?> ke
-										keranjang anda</small></p>
-							</a>
-							<?php endforeach;?>
-							<!-- All-->
-							<a href="javascript:void(0);" class="dropdown-item notify-item border-top"
-								data-toggle="modal" data-target="#simpan-wishlist">
-								Tambahkan ke wishlist anda
-							</a>
-							<?php else:?>
-							<!-- All-->
-							<a class="dropdown-item notify-item border-top">
-								Keranjang kosong
-							</a>
-							<?php endif;?>
-
-						</div>
-					</li>
-					<?php endif;?>
-
-					<!-- User-->
-					<li class="list-inline-item dropdown notification-list">
-						<a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown"
-							href="#" role="button" aria-haspopup="false" aria-expanded="false">
-							<img src="<?= base_url(); ?>assets/images/profile.png" alt="user" class="rounded-circle">
-						</a>
-						<div class="dropdown-menu dropdown-menu-right profile-dropdown  border-0">
-							<?php if($this->session->userdata('role') == 1):?>
-							<a class="dropdown-item" href="<?= site_url('admin');?>"><i
-									class="mdi mdi-account-circle m-r-5 text-muted"></i>
-								Admin</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="<?= site_url('logout');?>"><i
-									class="mdi mdi-logout m-r-5 text-muted"></i>
-								Logout</a>
-							<?php else:?>
-							<a class="dropdown-item" href="<?= site_url('pengguna');?>"><i
-									class="mdi mdi-account-circle m-r-5 text-muted"></i>
-								Dashboard</a>
-							<!-- <a class="dropdown-item" href="<?= site_url('pengguna/pengaturan');?>"><i
-									class="mdi mdi-settings m-r-5 text-muted"></i>
-								Setting</a> -->
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="<?= site_url('logout');?>"><i
-									class="mdi mdi-logout m-r-5 text-muted"></i>
-								Logout</a>
-							<?php endif;?>
-						</div>
-					</li>
-					<li class="menu-item list-inline-item">
-						<!-- Mobile menu toggle-->
-						<a class="navbar-toggle nav-link">
-							<div class="lines">
-								<span></span>
-								<span></span>
-								<span></span>
-							</div>
-						</a>
-						<!-- End mobile menu toggle-->
-					</li>
-					<?php else:?>
-					<div style="margin-top: 13px;">
-						<a href="<?= site_url('login');?>"
-							class="btn btn-primary shadow-none btn-round waves-effect waves-light">Masuk</a>
-						<a href="<?= site_url('register');?>"
-							class="btn btn-outline-success btn-round waves-effect waves-light">Daftar</a>
-					</div>
-					<?php endif;?>
-
-				</ul>
-			</div>
-			<!-- end menu-extras -->
-
-			<div class="clearfix"></div>
-
-		</div> <!-- end container -->
+<nav class="navbar navbar-expand-lg main-navbar">
+	<a href="<?= base_url();?>" class="navbar-brand sidebar-gone-hide"><?= $web_title;?></a>
+	<div class="navbar-nav">
+		<a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
 	</div>
-	<!-- end topbar-main -->
-	<?php if($this->uri->segment(1) == 'admin'):?>
-	<!-- MENU Start -->
-	<div class="navbar-custom">
-		<div class="container-fluid">
-			<div id="navigation">
-				<!-- Navigation Menu-->
-				<ul class="navigation-menu">
+	<div class="nav-collapse">
+		<a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
+			<i class="fas fa-ellipsis-v"></i>
+		</a>
+		<ul class="navbar-nav">
+			<!-- <li class="nav-item active"><a href="#" class="nav-link">Application</a></li> -->
+		</ul>
+	</div>
+	<ul class="navbar-nav navbar-right ml-auto">
+		<?php if($this->session->userdata('logged_in') || $this->session->userdata('logged_in') == true):?>
+		<?php if($this->session->userdata('role') == 2):?>
+		<li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+				class="nav-link notification-toggle nav-link-lg beep"><i class="dripicons-cart"></i></a>
+			<div class="dropdown-menu dropdown-list dropdown-menu-right">
+				<div class="dropdown-header">Keranjang anda</div>
+				<div class="dropdown-list-content dropdown-list-icons">
+					<?php if($this->session->userdata('keranjang')):?>
+					<?php foreach($this->session->userdata('keranjang') as $val):?>
+					<a href="javascript:void(0);" class="dropdown-item">
+						<div class="dropdown-item-icon bg-info text-white">
+							<i class="fas fa-bell"></i>
+						</div>
+						<div class="dropdown-item-desc">
+							<b><?= $val['produk'];?></b> Menambahkan <?= $val['jumlah'];?> <?= $val['produk'];?> ke
+							keranjang anda</small>
+							<div class="time">Yesterday</div>
+						</div>
+					</a>
+					<?php endforeach;?>
+					<?php else:?>
+					<a class="dropdown-item">
+						<div class="dropdown-item-desc text-center w-100 ml-0">
+							Keranjang anda kosong
+						</div>
+					</a>
+					<?php endif;?>
+				</div>
+				<?php if($this->session->userdata('keranjang')):?>
+				<div class="dropdown-footer text-center">
+					<a href="javascript:void(0);" class="dropdown-item" data-toggle="modal"
+						data-target="#simpan-checkout">Checkout keranjang <i class="dripicons-cart"></i></a>
+				</div>
+				<?php endif;?>
+			</div>
+		</li>
+		<?php endif;?>
+		<?php if($this->session->userdata('role') == 1):?>
+		<li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+				class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+			<div class="dropdown-menu dropdown-list dropdown-menu-right">
+				<div class="dropdown-header">Notifikasi</div>
+				<div class="dropdown-list-content dropdown-list-icons">
+					<a href="#" class="dropdown-item">
+						<div class="dropdown-item-icon bg-info text-white">
+							<i class="fas fa-bell"></i>
+						</div>
+						<div class="dropdown-item-desc">
+							Welcome to Stisla template!
+							<div class="time">Yesterday</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</li>
+		<?php endif;?>
+		<?php endif;?>
+		<?php if(!$this->session->userdata('logged_in') || $this->session->userdata('logged_in') == false):?>
+		<li class="ml-2"><a href="<?= site_url('login');?>" class="btn btn-outline-light btn-sm">Masuk ke akun anda</a></li>
+		<li class="ml-3"><a href="<?= site_url('register');?>" class="btn btn-light btn-sm">Daftar akun baru</a></li>
+		<?php else:?>
+		<li class="dropdown">
+			<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+				<img alt="image" src="<?= base_url();?>assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+				<div class="d-sm-none d-lg-inline-block">Hi, <?= $this->session->userdata('nama');?></div>
+			</a>
+			<div class="dropdown-menu dropdown-menu-right">
+				<div class="dropdown-title">Login pada <?= $this->session->userdata('login_time');?> WIB</div>
+				<?php if($this->session->userdata('role') == 1):?>
+				<a href="<?= site_url('admin');?>" class="dropdown-item has-icon">
+					<i class="dripicons-device-desktop"></i> Dashboard
+				</a>
+				<?php else:?>
+				<a href="<?= site_url('pengguna');?>" class="dropdown-item has-icon">
+					<i class="dripicons-user"></i> Profil
+				</a>
+				<a href="<?= site_url('pengguna');?>" class="dropdown-item has-icon">
+					<i class="dripicons-ticket"></i> Riwayat transaksi
+				</a>
+				<?php endif;?>
+				<div class="dropdown-divider"></div>
+				<a href="<?= site_url('logout');?>" class="dropdown-item has-icon text-danger">
+					<i class="fas fa-sign-out-alt"></i> Logout
+				</a>
+			</div>
+		</li>
+		<?php endif;?>
+	</ul>
+</nav>
 
-					<li class="has-submenu">
-						<a href="<?= site_url('admin');?>"><i class="dripicons-device-desktop"></i>Dashboard</a>
-					</li>
-
-					<li class="has-submenu">
-						<a href="<?= site_url('admin/kelola-sayur');?>"><i class="dripicons-to-do"></i>Kelola Data
-							Produk</a>
-					</li>
-
-					<li class="has-submenu">
-						<a href="<?= site_url('admin/data-pengguna');?>"><i class="dripicons-user-group"></i>Data
-							Pengguna</a>
-					</li>
-
-				</ul>
-				<!-- End navigation menu -->
-			</div> <!-- end #navigation -->
-		</div> <!-- end container -->
-	</div> <!-- end navbar-custom -->
-	<?php endif;?>
-</header>
-<!-- End Navigation Bar-->
 
 
-<div id="simpan-wishlist" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+<div id="simpan-checkout" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Tambah wishlist</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Checkout keranjang</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body p-4">
-				<form action="<?= site_url('home/tambah_wishlist');?>" method="post" enctype="multipart/form-data">
-					<p>Tambahkan <b><?= count($this->session->userdata('keranjang'));?></b> item kedalam
-						wishlist anda?</p>
+				<form action="<?= site_url('home/tambah_checkout');?>" method="post" enctype="multipart/form-data">
+					<p>Checkout sebanyak <b><?= count($this->session->userdata('keranjang'));?></b> produk?</p>
 					<h6>Produk anda:</h6>
 					<ul>
 						<?php foreach ($this->session->userdata('keranjang') as $val):?>
-						<li><?= $val['sayur'];?> + <?= $val['jumlah'];?> buah</li>
+						<li><?= $val['produk'];?> + <?= $val['jumlah'];?> produk</li>
 						<?php endforeach;?>
 					</ul>
 					<div class="form-group">
-						<label for="inputKeteranganProduk" class="input-label">Tambahkan catatan <small
+						<label for="inputKeteranganSayur" class="input-label">Tambahkan catatan <small
 								class="text-secondary">(optional)</small></label>
-						<textarea class="form-control" name="catatan" id="inputKeteranganProduk" name="catatan"
-							rows="5"></textarea>
+						<textarea class="form-control" name="catatan" id="inputKeteranganSayur" name="catatan" rows="5"></textarea>
 					</div>
 					<div class="modal-footer px-0 mx-0 mb-0 pb-0">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-						<button type="submit" class="btn btn-primary">Tambahkan wishlist</button>
+						<button type="submit" class="btn btn-primary">Checkout produk</button>
 					</div>
 				</form>
 			</div>
@@ -183,5 +138,8 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="wrapper">
-	<div class="container-fluid">
+<!-- Main Content -->
+<div class="main-content"
+	<?php if(empty($this->uri->segment(1)) || $this->uri->segment(1) == 'home' || $this->uri->segment(1) == 'pengguna'):?> style="padding-top:125px !important"
+	<?php endif;?>>
+	<section class="section">

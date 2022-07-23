@@ -104,7 +104,7 @@
 					</li>
 
 					<li class="has-submenu">
-						<a href="<?= site_url('admin/kelola-sayur');?>"><i class="dripicons-to-do"></i>Kelola Data
+						<a href="<?= site_url('admin/kelola-produk');?>"><i class="dripicons-to-do"></i>Kelola Data
 							Produk</a>
 					</li>
 

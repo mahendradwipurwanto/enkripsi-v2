@@ -12,21 +12,21 @@ class M_admin extends CI_Model
     function get_statistik(){
 
         $pengguna = $this->db->get_where('tb_auth', ['role' => 2, 'is_deleted' => 0])->num_rows();
-        $sayur = $this->db->get_where('tb_produk', ['is_deleted' => 0])->num_rows();
-        $wishlist = $this->db->get_where('tb_wishlist', ['is_deleted' => 0])->num_rows();
+        $produk = $this->db->get_where('tb_produk', ['is_deleted' => 0])->num_rows();
+        $checkout = $this->db->get_where('tb_checkout', ['is_deleted' => 0])->num_rows();
         $pengunjung = $this->db->get('tb_pengunjung')->num_rows();
 
         $arrStatistik['pengguna'] = $pengguna;
-        $arrStatistik['sayur'] = $sayur;
-        $arrStatistik['wishlist'] = $wishlist;
+        $arrStatistik['produk'] = $produk;
+        $arrStatistik['checkout'] = $checkout;
         $arrStatistik['pengunjung'] = $pengunjung;
 
         return $arrStatistik;
     }
 
-    function get_wishlist(){
-        // $this->db->select('a.*, b.nama, b.no_telp, b.profil, c.sayur, c.gambar, c.harga');
-        // $this->db->from('tb_wishlist a');
+    function get_checkout(){
+        // $this->db->select('a.*, b.nama, b.no_telp, b.profil, c.produk, c.gambar, c.harga');
+        // $this->db->from('tb_checkout a');
         // $this->db->join('tb_user b', 'a.user_id = b.user_id', 'left');
         // $this->db->join('tb_produk c', 'a.produk_id = c.id', 'left');
         // $this->db->where('a.is_deleted', 0);
@@ -35,24 +35,24 @@ class M_admin extends CI_Model
         // return $this->db->get()->result();
         
         $this->db->select('a.*, b.nama, b.no_telp, b.profil');
-        $this->db->from('tb_wishlist a');
+        $this->db->from('tb_checkout a');
         $this->db->join('tb_user b', 'a.user_id = b.user_id', 'left');
         $this->db->where([ 'a.is_deleted' => 0]);
         $this->db->order_by('a.created_at DESC');
 
-        $wishlist = $this->db->get()->result();
+        $checkout = $this->db->get()->result();
 
-        if (empty($wishlist)) {
-            return $wishlist;
+        if (empty($checkout)) {
+            return $checkout;
         } else {
             $arrProduk = [];
-            foreach ($wishlist as $key => $val):
+            foreach ($checkout as $key => $val):
 
-            $this->db->select('a.wishlist_id, a.produk_id, a.jumlah, b.sayur, b.gambar');
-            $this->db->from('tb_wishlist_detail a');
+            $this->db->select('a.checkout_id, a.produk_id, a.jumlah, b.produk, b.gambar');
+            $this->db->from('tb_checkout_detail a');
             $this->db->join('tb_produk b', 'a.produk_id = id', 'left');
-            $this->db->where('a.wishlist_id', $val->id);
-            $detailWishlist = $this->db->get()->result();
+            $this->db->where('a.checkout_id', $val->id);
+            $detailCheckout = $this->db->get()->result();
 
             $arrProduk[$key]['id'] = $val->id;
             $arrProduk[$key]['user_id'] = $val->user_id;
@@ -60,7 +60,7 @@ class M_admin extends CI_Model
             $arrProduk[$key]['profil'] = $val->profil;
             $arrProduk[$key]['catatan'] = $val->catatan;
             $arrProduk[$key]['created_at'] = $val->created_at;
-            $arrProduk[$key]['keranjang'] = $detailWishlist;
+            $arrProduk[$key]['keranjang'] = $detailCheckout;
             endforeach;
 
             return $arrProduk;
@@ -85,13 +85,13 @@ class M_admin extends CI_Model
     }
 
     function tambah_produk($gambar){
-        $sayur = $this->input->post('sayur');
+        $produk = $this->input->post('produk');
         $harga = $this->input->post('harga');
         $stok = $this->input->post('stok');
         $keterangan = $this->input->post('keterangan');
 
         $data = [
-            'sayur' => $sayur,
+            'produk' => $produk,
             'gambar' => $gambar == null ? 'assets/images/placeholder.png' : $gambar,
             'harga' => $harga,
             'stok' => $stok,
@@ -105,20 +105,20 @@ class M_admin extends CI_Model
     function edit_produk($gambar){
         $id = $this->input->post('id');
 
-        $sayur = $this->input->post('sayur');
+        $produk = $this->input->post('produk');
         $harga = $this->input->post('harga');
         $stok = $this->input->post('stok');
         $keterangan = $this->input->post('keterangan');
         if($gambar == null){
             $data = [
-                'sayur' => $sayur,
+                'produk' => $produk,
                 'harga' => str_replace('.', '', $harga),
                 'stok' => $stok,
                 'keterangan' => $keterangan
             ];
         }else{
             $data = [
-                'sayur' => $sayur,
+                'produk' => $produk,
                 'gambar' => $gambar == null ? 'assets/images/placeholder.png' : $gambar,
                 'harga' => str_replace('.', '', $harga),
                 'stok' => $stok,

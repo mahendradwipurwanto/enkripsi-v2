@@ -22,7 +22,7 @@ class M_home extends CI_Model
         $this->db->from('tb_produk a');
         $this->db->where('a.is_deleted', 0);
         if($cari != null){
-            $this->db->like('sayur', $cari);
+            $this->db->like('produk', $cari);
         }
         $this->db->order_by('a.created_at DESC');
 
@@ -49,10 +49,10 @@ class M_home extends CI_Model
     }
 
     function get_produk($id, $jumlah){
-        $sayur = $this->db->get_where('tb_produk', ['id' => $id])->row();
+        $produk = $this->db->get_where('tb_produk', ['id' => $id])->row();
 
-        if(isset($sayur)){
-            if($sayur->stok > $jumlah){
+        if(isset($produk)){
+            if($produk->stok >= $jumlah){
                 return true;
             }else{
                 return false;
@@ -63,15 +63,15 @@ class M_home extends CI_Model
     }
 
     function updateJumlahProduk($id, $jumlah){
-        $sayur = $this->db->get_where('tb_produk', ['id' => $id])->row();
+        $produk = $this->db->get_where('tb_produk', ['id' => $id])->row();
 
-        $stok_baru = $sayur->stok-$jumlah;
+        $stok_baru = $produk->stok-$jumlah;
         $this->db->where('id', $id);
         $this->db->update('tb_produk', ['stok' => $stok_baru]);
     }
 
 
-    function tambah_wishlist(){
+    function tambah_checkout(){
         $this->db->trans_strict(false);
 
         $catatan = $this->input->post('catatan');
@@ -82,17 +82,17 @@ class M_home extends CI_Model
             'created_at' => time()
         ];
         $this->db->trans_begin();
-        $this->db->insert('tb_wishlist', $data);
+        $this->db->insert('tb_checkout', $data);
         $wish_id = $this->db->insert_id();
 
         foreach($this->session->userdata('keranjang') as $key => $val):
             $arrDetail = [
-                'wishlist_id' => $wish_id,
+                'checkout_id' => $wish_id,
                 'jumlah' => $val['jumlah'],
                 'produk_id' => $val['produk_id']
             ];
 
-            $this->db->insert('tb_wishlist_detail', $arrDetail);
+            $this->db->insert('tb_checkout_detail', $arrDetail);
         endforeach;
         
         $this->db->trans_complete();

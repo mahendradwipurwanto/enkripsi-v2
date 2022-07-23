@@ -13,6 +13,6 @@ class Utility extends CI_Controller
 
     public function not_found()
     {
-        $this->templatefront->view('utility/not_found');
+        $this->templateauth->view('utility/not_found');
     }
 }

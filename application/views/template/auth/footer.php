@@ -1,53 +1,26 @@
-
+				</div>
+			</section>
 		</div>
-		<!-- end wrapper -->
 
-		<!-- javascript -->
-		<script type="text/javascript" src="<?= base_url(); ?>assets/js/modernizr.min.js"></script>
-		<script type="text/javascript" src="<?= base_url(); ?>assets/js/waves.js"></script>
-		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.slimscroll.js"></script>
-		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.nicescroll.js"></script>
-		<script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.scrollTo.min.js"></script>
-
-		<!-- KNOB JS -->
-		<script type="text/javascript" src="<?= base_url(); ?>assets/plugins/jquery-knob/excanvas.js"></script>
-		<script type="text/javascript" src="<?= base_url(); ?>assets/plugins/jquery-knob/jquery.knob.js"></script> 
-
-        <!-- Required datatable js -->
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
-        <!-- Buttons examples -->
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/jszip.min.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/pdfmake.min.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/vfs_fonts.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/buttons.html5.min.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/buttons.print.min.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/buttons.colVis.min.js"></script>
-        <!-- Responsive examples -->
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/dataTables.responsive.min.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
-
-        <!-- Datatable init js -->
-        <script type="text/javascript" src="<?= base_url(); ?>assets/pages/datatables.init.js"></script>
-
-        <script type="text/javascript" src="<?= base_url(); ?>assets/plugins/dropify/js/dropify.min.js"></script>
-        <script type="text/javascript" src="<?= base_url(); ?>assets/pages/dropify.init.js"></script>
-
-		<!-- App js -->
-		<script type="text/javascript" src="<?= base_url(); ?>assets/js/app.js"></script>
-
-		<script>
-		$('form').submit(function(event) {
-			$('#send-button').prop("disabled", true);
-			// add spinner to button
-			$('#send-button').html(
-			`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
-			);
-			return;
-		});
+		<!-- General JS Scripts -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
 		</script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+		<script src="<?= base_url();?>assets/js/stisla.js"></script>
+
+		<!-- JS Libraies -->
+
+		<!-- Page Specific JS File -->
+
+		<!-- Template JS File -->
+		<script src="<?= base_url();?>assets/js/scripts.js"></script>
+		<script src="<?= base_url();?>assets/js/custom.js"></script>
+
 
 	</body>
 

@@ -12,9 +12,6 @@ MySQL - 10.4.22-MariaDB : Database - db_otpproduk
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_otpproduk` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-
-USE `db_otpproduk`;
 
 /*Table structure for table `tb_auth` */
 
@@ -58,6 +55,28 @@ CREATE TABLE `tb_checkout` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `tb_checkout_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_auth` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+/*Table structure for table `tb_produk` */
+
+DROP TABLE IF EXISTS `tb_produk`;
+
+CREATE TABLE `tb_produk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `produk` varchar(50) DEFAULT NULL,
+  `gambar` varchar(255) DEFAULT 'assets/images/placeholder.png',
+  `stok` int(20) NOT NULL DEFAULT 0,
+  `harga` int(20) DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `created_at` int(20) NOT NULL DEFAULT 0,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_produk` */
+
+insert  into `tb_produk`(`id`,`produk`,`gambar`,`stok`,`harga`,`keterangan`,`created_at`,`is_deleted`) values 
+(9,'Akun minecraft','assets/images/placeholder.png',50,25000,'',0,0),
+(10,'Youtube premium','assets/images/placeholder.png',100,1750,'',0,0);
 
 /*Data for the table `tb_checkout` */
 
@@ -355,28 +374,6 @@ insert  into `tb_pengunjung`(`id`,`device`,`created_at`) values
 (422,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658662417),
 (423,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658662684),
 (424,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658663714);
-
-/*Table structure for table `tb_produk` */
-
-DROP TABLE IF EXISTS `tb_produk`;
-
-CREATE TABLE `tb_produk` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `produk` varchar(50) DEFAULT NULL,
-  `gambar` varchar(255) DEFAULT 'assets/images/placeholder.png',
-  `stok` int(20) NOT NULL DEFAULT 0,
-  `harga` int(20) DEFAULT NULL,
-  `keterangan` text DEFAULT NULL,
-  `created_at` int(20) NOT NULL DEFAULT 0,
-  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-
-/*Data for the table `tb_produk` */
-
-insert  into `tb_produk`(`id`,`produk`,`gambar`,`stok`,`harga`,`keterangan`,`created_at`,`is_deleted`) values 
-(9,'Akun minecraft','assets/images/placeholder.png',50,25000,'',0,0),
-(10,'Youtube premium','assets/images/placeholder.png',100,1750,'',0,0);
 
 /*Table structure for table `tb_settings` */
 

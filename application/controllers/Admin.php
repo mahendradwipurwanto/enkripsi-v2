@@ -143,4 +143,14 @@ class Admin extends CI_Controller
             redirect(site_url('admin/pengaturan'));
         }
     }
+
+    function bypass_otp($status){
+        if ($this->M_admin->bypass_otp($status) == true) {
+            $this->session->set_flashdata('notif_success', 'Berhasil mengubah data pengaturan');
+            redirect($this->agent->referrer());
+        } else {
+            $this->session->set_flashdata('notif_warning', 'Anda tidak melakukan perubahan data pengaturan!');
+            redirect(site_url('admin/pengaturan'));
+        }
+    }
 }

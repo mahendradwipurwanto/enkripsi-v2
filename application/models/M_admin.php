@@ -178,4 +178,13 @@ class M_admin extends CI_Model
         return ($this->db->affected_rows() != 1) ? false : true;
 
     }
+
+    function bypass_otp($status)
+    {
+        $this->db->where('key', 'bypass_otp');
+        $this->db->update('tb_settings', ['value' => $status]);
+
+        return ($this->db->affected_rows() != 1) ? false : true;
+
+    }
 }

@@ -44,6 +44,13 @@
 									data-target="#metode-mandiri">MANDIRI</button>
 							</div>
 						</div>
+						<div class="form-group row align-items-center">
+							<label class="form-control-label col-sm-3 text-md-right">Aktifkan OTP saat pengguna login?</label>
+							<div class="col-sm-6 col-md-9">
+								<a href="<?= site_url('admin/bypass_otp/false');?>" class="btn <?= $bypass_otp == 'false' ? 'btn-primary' : 'btn_secondary';?> btn-sm">Ya</a>
+								<a href="<?= site_url('admin/bypass_otp/true');?>" class="btn <?= $bypass_otp == 'true' ? 'btn-primary' : 'btn_secondary';?> btn-sm">Tidak</a>
+							</div>
+						</div>
 					</div>
 					<div class="card-footer text-md-right">
 						<button class="btn btn-primary" id="save-btn">Simpan pengaturan</button>

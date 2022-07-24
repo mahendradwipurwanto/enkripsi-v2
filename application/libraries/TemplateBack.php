@@ -36,6 +36,8 @@ class TemplateBack
         $data['bri'] = $this->getSettingsMetode('metode_bri');
         $data['mandiri'] = $this->getSettingsMetode('metode_mandiri');
 
+        $data['bypass_otp'] = $this->getSettingsValue('bypass_otp');
+
         $this->_ci->load->view('template/backend/header', $data);
         $this->_ci->load->view('template/backend/navbar', $data);
         $this->_ci->load->view('template/backend/sidebar', $data);

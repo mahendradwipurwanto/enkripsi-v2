@@ -14,7 +14,7 @@
 							<div class="icon-contain">
 								<div class="row">
 									<div class="col-2 align-self-center">
-										<i class="fas fa-users text-gradient-danger"></i>
+										<i class="fas fa-users text-gradient-danger" style="font-size: 40px"></i>
 									</div>
 									<div class="col-10 text-right">
 										<h5 class="mt-0 mb-1"><?= number_format($statistik['pengguna']);?></h5>
@@ -31,7 +31,7 @@
 							<div class="icon-contain">
 								<div class="row">
 									<div class="col-2 align-self-center">
-										<i class="fas fa-box text-gradient-success"></i>
+										<i class="fas fa-box text-gradient-success" style="font-size: 40px"></i>
 									</div>
 									<div class="col-10 text-right">
 										<h5 class="mt-0 mb-1"><?= number_format($statistik['produk']);?></h5>
@@ -48,7 +48,7 @@
 							<div class="icon-contain">
 								<div class="row">
 									<div class="col-2 align-self-center">
-										<i class="fas fa-boxes text-gradient-warning"></i>
+										<i class="fas fa-boxes text-gradient-warning" style="font-size: 40px"></i>
 									</div>
 									<div class="col-10 text-right">
 										<h5 class="mt-0 mb-1"><?= number_format($statistik['checkout']);?></h5>
@@ -65,7 +65,7 @@
 							<div class="icon-contain">
 								<div class="row">
 									<div class="col-2 align-self-center">
-										<i class="far fa-chart-bar text-gradient-primary"></i>
+										<i class="far fa-chart-bar text-gradient-primary" style="font-size: 40px"></i>
 									</div>
 									<div class="col-10 text-right">
 										<h5 class="mt-0 mb-1"><?= number_format($statistik['pengunjung']);?></h5>
@@ -93,7 +93,9 @@
 									<th width="5%" class="text-center">No.</th>
 									<th width="10%" class="text-center">Tanggal</th>
 									<th>Pengguna</th>
-									<th>Total keranjang</th>
+									<th>Total Produk</th>
+									<th>Metode</th>
+									<th>Bukti Pembayaran</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -109,9 +111,37 @@
 										<?= $val['nama'];?>
 									</td>
 									<td><?= number_format(count($val['keranjang']));?> produk</td>
+									<td><?= $val['metode'];?></td>
+									<td width="10%" class="text-center">
+										<?php if(isset($val['bukti_bayar']) && $val['bukti_bayar'] != '-'):?>
+										<button class="btn btn-primary btn-sm" data-toggle="modal"
+											data-target="#bukti-bayar-<?= $val['id'];?>">lihat</button>
+										<?php else:?>
+										-
+										<?php endif;?>
+									</td>
 									<td width="10%" class="text-center"><button class="btn btn-primary btn-sm"
 											data-toggle="modal"
 											data-target="#detail-checkout-<?= $val['id'];?>">detail</button></td>
+
+									<div id="bukti-bayar-<?= $val['id'];?>" class="modal fade" tabindex="-1"
+										role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Bukti pembayaran</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body p-4">
+													<img src="<?= base_url();?><?= $val['bukti_bayar'];?>"
+														class="w-100 h-auto" alt="">
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
 
 									<div id="detail-checkout-<?= $val['id'];?>" class="modal fade" tabindex="-1"
 										role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -126,8 +156,8 @@
 												</div>
 												<div class="modal-body p-4">
 													<dl class="row mb-0">
-														<?php foreach($val['keranjang'] as $item):?>
-														<dt class="col-sm-3">Produk</dt>
+														<?php $noo = 1; foreach($val['keranjang'] as $item):?>
+														<dt class="col-sm-3">Produk <?= count($val['keranjang']) > 1 ? $noo++ : '';?></dt>
 														<dd class="col-sm-9"><?= $item->produk;?> -
 															<?= number_format($item->jumlah);?> buah</dd>
 														<?php endforeach;?>

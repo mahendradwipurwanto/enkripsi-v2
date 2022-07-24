@@ -1,7 +1,7 @@
 <div class="section-header">
 	<h1>Pengguna</h1>
 	<div class="section-header-breadcrumb">
-		<div class="breadcrumb-item active"><a href="<?= site_url('admin');?>">Dashboard</a></div>
+		<div class="breadcrumb-item active"><a href="<?= site_url('pengguna');?>">Dashboard</a></div>
 	</div>
 </div>
 <div class="section-body">
@@ -9,45 +9,69 @@
 		<div class="col-xl-4">
 			<div class="card profile-widget">
 				<div class="profile-widget-header">
-					<img alt="image" src="<?= base_url();?>assets/img/avatar/avatar-1.png"
+					<img alt="image" src="<?= base_url();?>assets/img/avatar/avatar-<?= $avatar;?>.png"
 						class="rounded-circle profile-widget-picture">
 					<div class="profile-widget-items">
 						<div class="profile-widget-item">
 							<div class="profile-widget-item-label">Bergabung</div>
-							<div class="profile-widget-item-value">187</div>
+							<div class="profile-widget-item-value"><?= date('d/m/Y', $user->created_at);?></div>
 						</div>
 						<div class="profile-widget-item">
 							<div class="profile-widget-item-label">Terakhir login</div>
-							<div class="profile-widget-item-value">6,8K</div>
+							<div class="profile-widget-item-value"><?= date('H:i', $user->modified_at);?> WIB</div>
 						</div>
 						<div class="profile-widget-item">
 							<div class="profile-widget-item-label">Total transaksi</div>
-							<div class="profile-widget-item-value">2,1K</div>
+							<div class="profile-widget-item-value"><?= number_format(count($checkout));?></div>
 						</div>
 					</div>
 				</div>
 				<div class="profile-widget-description">
-					<div class="profile-widget-name">Ujang Maman <div class="text-muted d-inline font-weight-normal">
-							<div class="slash"></div> Web Developer
+					<div class="profile-widget-name"><?= $user->nama;?></div>
+					<div class="list-unstyled list-unstyled-border">
+						<div class="media">
+							<div class="media-body w-100">
+								<h6 class="mb-1">Email</h6>
+								<p><?= $user->email;?></p>
+							</div>
+						</div>
+						<div class="media">
+							<div class="media-body w-100">
+								<h6 class="mb-1">Nomor Telepon</h6>
+								<p><?= $user->no_telp;?></p>
+							</div>
+						</div>
+						<div class="media">
+							<div class="media-body w-100">
+								<h6 class="mb-1">Alamat</h6>
+								<p><?= $user->alamat == null ? 'Belum melengkapi' : $user->alamat;?></p>
+							</div>
 						</div>
 					</div>
-					Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional
-					character but an original hero in my family, a hero for his children and for his wife. So, I use the
-					name as a user in this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.
+					<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"
+						data-target="#decrypt"><?= $this->session->userdata('decrypt') == true ? 'encrypt' : 'decrypt' ;?></button>
+					<?php if($this->session->userdata('decrypt') == true):?>
+					<button type="button" class="btn btn-primary btn-sm float-right mr-2" data-toggle="modal"
+						data-target="#ubah-pengguna">ubah data diri</button>
+					<?php else:?>
+					<button type="button" class="btn btn-primary btn-sm float-right mr-2" data-toggle="modal" data-target="#dekripsi-dulu">ubah data diri</button>
+					<?php endif;?>
 				</div>
 			</div>
 		</div>
 		<div class="col-xl-8">
 			<div class="card">
 				<div class="card-body">
-					<h5 class="header-title pb-3 mt-0">Data produk yang ingin dipesan</h5>
+					<h5 class="header-title pb-3 mt-0">Data transaksi pengguna</h5>
 					<div class="table-responsive">
 						<table class="table table-hover table-striped dt-responsive nowrap"
 							style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatable-buttons">
 							<thead>
 								<tr class="align-self-center">
-									<th width="10%" class="text-center">Tanggal</th>
-									<th>Jumlah checkout produk</th>
+									<th class="text-center">Tanggal</th>
+									<th>Jumlah produk</th>
+									<th>Metode Pembayaran</th>
+									<th>Bukti Pembayaran</th>
 									<th> </th>
 								</tr>
 							</thead>
@@ -57,9 +81,37 @@
 								<tr>
 									<td class="text-center"><?= date("d F Y", $val['created_at']);?></td>
 									<td><?= number_format(count($val['keranjang']));?> produk</td>
+									<td><?= $val['metode'];?></td>
+									<td width="10%" class="text-center">
+										<?php if(isset($val['bukti_bayar']) && $val['bukti_bayar'] != '-'):?>
+										<button class="btn btn-primary btn-sm" data-toggle="modal"
+											data-target="#bukti-bayar-<?= $val['id'];?>">lihat</button>
+										<?php else:?>
+										-
+										<?php endif;?>
+									</td>
 									<td width="10%" class="text-center"><button class="btn btn-primary btn-sm"
 											data-toggle="modal"
 											data-target="#detail-checkout-<?= $val['id'];?>">detail</button></td>
+
+									<div id="bukti-bayar-<?= $val['id'];?>" class="modal fade" tabindex="-1"
+										role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Bukti pembayaran</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body p-4">
+													<img src="<?= base_url();?><?= $val['bukti_bayar'];?>"
+														class="w-100 h-auto" alt="">
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
 
 									<div id="detail-checkout-<?= $val['id'];?>" class="modal fade" tabindex="-1"
 										role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -74,8 +126,9 @@
 												</div>
 												<div class="modal-body p-4">
 													<dl class="row mb-0">
-														<?php foreach($val['keranjang'] as $item):?>
-														<dt class="col-sm-3">Produk</dt>
+														<?php $noo = 1;foreach($val['keranjang'] as $item):?>
+														<dt class="col-sm-3">Produk
+															<?= count($val['keranjang']) > 1 ? $noo++ : '';?></dt>
 														<dd class="col-sm-9"><?= $item->produk;?> -
 															<?= number_format($item->jumlah);?> buah</dd>
 														<?php endforeach;?>
@@ -101,3 +154,95 @@
 		</div>
 	</div>
 </div>
+
+<div id="dekripsi-dulu" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="<?= site_url('pengguna/decrypt');?>" method="post">
+					<p>Decrypt data terlebih dahulu untuk mengubah data diri</p>
+					<div class="modal-footer px-0 mx-0">
+						<button type="button" class="btn btn-primary w-100" data-dismiss="modal">Oke</button>
+					</div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="decrypt" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">
+					<?= $this->session->userdata('decrypt') == true ? 'Encrypt' : 'Decrypt' ;?> data diri</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="<?= site_url('pengguna/decrypt');?>" method="post">
+					<p>Apakah anda yakin ingin
+						men-<i><?= $this->session->userdata('decrypt') == true ? 'encrypt' : 'decrypt' ;?></i> data diri
+						anda?</p>
+					<div class="modal-footer px-0 mx-0">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit"
+							class="btn btn-primary"><?= $this->session->userdata('decrypt') == true ? 'Encrypt' : 'Decrypt' ;?>
+							data diri</button>
+					</div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div id="ubah-pengguna" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Ubah data diri</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="<?= site_url('admin/ubah_pengguna');?>" method="post">
+					<input type="hidden" name="user_id" value="<?= $user->user_id;?>">
+					<div class="form-group">
+						<label for="inputNama">Nama pengguna</label>
+						<input type="text" class="form-control" id="inputNama" name="nama" value="<?= $user->nama;?>"
+							required>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail">Email pengguna</label>
+						<input type="text" class="form-control" id="inputEmail" name="email" value="<?= $user->email;?>"
+							required>
+					</div>
+					<div class="form-group">
+						<label for="inputNomor">Nomor telepon pengguna</label>
+						<input type="text" class="form-control" id="inputNomor" name="no_telp"
+							value="<?= $user->no_telp;?>" required>
+					</div>
+					<div class="form-group">
+						<label for="inputAlamat">Alamat</label>
+						<textarea type="text" class="form-control" id="inputAlamat" name="alamat" style="height: 150px;"
+							value="<?= $user->alamat;?>" required></textarea>
+					</div>
+					<div class="modal-footer px-0 mx-0">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+					</div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

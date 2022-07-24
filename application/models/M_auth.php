@@ -8,6 +8,20 @@ class M_auth extends CI_Model
         parent::__construct();
     }
 
+    function log_time($user_id){
+        $this->db->where('user_id', $user_id);
+        $this->db->update('tb_auth', ['modified_at' => time()]);
+    }
+
+    public function getSetting($key){
+        $data = $this->db->get_where('tb_settings', ['key' => $key])->row()->value;
+        if(isset($data)){
+            return $data;
+        }else{
+            return false;
+        }
+    }
+
     public function cek_user($email)
     {
         $this->db->select('*');
@@ -61,6 +75,7 @@ class M_auth extends CI_Model
     {
         $nama           = htmlspecialchars($this->input->post('nama'));
         $no_telp        = htmlspecialchars($this->input->post('no_telp'));
+        $alamat        = htmlspecialchars($this->input->post('alamat'));
 
         $this->db->insert('tb_auth', $data_auth);
 
@@ -68,7 +83,8 @@ class M_auth extends CI_Model
             'user_id'   => $this->db->insert_id(),
             'nama'      => 'assets/images/profile.png',
             'nama'      => $nama,
-            'no_telp'   => $no_telp
+            'no_telp'   => $no_telp,
+            'alamat'   => $alamat
         );
 
         $this->db->insert('tb_user', $data_user);

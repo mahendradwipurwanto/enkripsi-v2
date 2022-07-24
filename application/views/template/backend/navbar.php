@@ -38,25 +38,6 @@
 		</div>
 	</li>
 	<?php endif;?>
-	<?php if($this->session->userdata('role') == 1):?>
-	<li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-			class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
-		<div class="dropdown-menu dropdown-list dropdown-menu-right">
-			<div class="dropdown-header">Notifikasi</div>
-			<div class="dropdown-list-content dropdown-list-icons">
-				<a href="#" class="dropdown-item">
-					<div class="dropdown-item-icon bg-info text-white">
-						<i class="fas fa-bell"></i>
-					</div>
-					<div class="dropdown-item-desc">
-						Welcome to Stisla template!
-						<div class="time">Yesterday</div>
-					</div>
-				</a>
-			</div>
-		</div>
-	</li>
-	<?php endif;?>
 	<?php endif;?>
 	<?php if(!$this->session->userdata('logged_in') || $this->session->userdata('logged_in') == false):?>
 	<li class="ml-2"><a href="<?= site_url('login');?>" class="btn btn-outline-light btn-sm">Masuk ke akun
@@ -66,7 +47,7 @@
 	<?php else:?>
 	<li class="dropdown">
 		<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-			<img alt="image" src="<?= base_url();?>assets/img/avatar/avatar-1.png"
+			<img alt="image" src="<?= base_url();?>assets/img/avatar/avatar-<?= $avatar;?>.png"
 				class="rounded-circle mr-1">
 			<div class="d-sm-none d-lg-inline-block">Hi, <?= $this->session->userdata('nama');?></div>
 		</a>

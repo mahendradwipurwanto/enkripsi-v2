@@ -85,7 +85,7 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah checkout</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Tambah ke keranjang</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -94,8 +94,9 @@
 					<form action="<?= site_url('home/add_cartWish');?>" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="id" value="<?= $val->id;?>" required>
 						<input type="hidden" name="produk" value="<?= $val->produk;?>" required>
+						<input type="hidden" name="stok" value="<?= $val->stok;?>" required>
 						<input type="hidden" name="gambar" value="<?= base_url();?><?= $val->gambar;?>" required>
-						<p>Tambahkan <b><?= $val->produk;?></b> kedalam checkout anda, lengkapi data dibawah ini untuk
+						<p>Tambahkan <b><?= $val->produk;?></b> kedalam keranjang anda, lengkapi data dibawah ini untuk
 							melanjutkan</p>
 						<div class="form-group">
 							<label for="inputNamaProduk" class="input-label">Jumlah yang diinginkan <small

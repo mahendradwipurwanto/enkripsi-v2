@@ -14,7 +14,7 @@ if (!function_exists('convertToBase64')) {
 }
 
 if (!function_exists('ej')) {
-    function ej($params)
+    function ej($params = 'test')
     {
         echo json_encode($params);
 
@@ -47,5 +47,18 @@ if (!function_exists('time_ago')) {
             }
         }
         return $a;
+    }
+}
+
+if (!function_exists('randomString')) {
+    function randomString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

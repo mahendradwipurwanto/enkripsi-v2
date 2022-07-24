@@ -16,6 +16,19 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+        <!-- plugin form -->
+        <script src="<?= base_url();?>assets/node_modules/cleave.js/dist/cleave.min.js"></script>
+        <script src="<?= base_url();?>assets/node_modules/cleave.js/dist/addons/cleave-phone.us.js"></script>
+        <script src="<?= base_url();?>assets/node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+        <script src="<?= base_url();?>assets/node_modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="<?= base_url();?>assets/node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+        <script src="<?= base_url();?>assets/node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        <script src="<?= base_url();?>assets/node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+        <script src="<?= base_url();?>assets/node_modules/select2/dist/js/select2.full.min.js"></script>
+        <script src="<?= base_url();?>assets/node_modules/selectric/public/jquery.selectric.min.js"></script>
+        <script src="<?= base_url();?>assets/js/page/forms-advanced-forms.js"></script>
+
         <script src="<?= base_url();?>assets/js/stisla.js"></script>
 
         <!-- Template JS File -->

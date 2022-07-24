@@ -57,3 +57,102 @@
 	padding-right: 200px !important;
 	padding-left: 200px !important;
 }
+
+.img-cart {
+	position: absolute;
+	width: 40px;
+	border-radius: 50px;
+	/* margin-top: -3px; */
+	left: 20px;
+}
+
+
+/* SCROLL BAR */
+
+
+/* width */
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	cursor: pointer;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+	background: #301591;
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+	background: #301591;
+	opacity: 0.9;
+	cursor: pointer !important;
+}
+
+.accordion-lg .accordion-button {
+	font-size: 1rem;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+}
+
+/* UPLOAD IMG */
+
+
+.upload-card {
+	width: 200px;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.upload-card:hover {
+	cursor: pointer;
+}
+
+.upload-img {
+	flex-shrink: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
+
+/* THEME CARD PREV */
+
+.text-lines {
+	vertical-align: middle;
+	width: 100%;
+	margin-right: 2rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.theme-card {
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.theme-img {
+	flex-shrink: 0;
+	min-width: 100%;
+	min-height: 100%;
+}

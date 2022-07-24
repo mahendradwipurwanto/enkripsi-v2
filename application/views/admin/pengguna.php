@@ -7,6 +7,12 @@
 	</div>
 </div>
 <div class="section-body">
+	<h2 class="section-title">Data pengguna</h2>
+	<p class="section-lead">
+		Kelola data pengguna yang telah mendaftar pada website di halaman ini
+	</p>
+
+	<div id="output-status"></div>
 	<div class="row">
 		<div class="col-xl-12">
 			<div class="card">
@@ -46,8 +52,13 @@
 										<span class="badge badge-boxed badge-soft-danger">tidak diketahui</span>
 										<?php endif;?>
 									</td>
-									<td class="text-center"><button class="btn btn-primary btn-sm" data-toggle="modal"
-											data-target="#detail-pengguna-<?= $val->user_id;?>">detail</button></td>
+									<td class="text-center">
+										<button class="btn btn-primary btn-sm" data-toggle="modal"
+											data-target="#edit-pengguna-<?= $val->user_id;?>"><i
+												class="dripicons-document-edit"></i></button>
+										<button class="btn btn-primary btn-sm" data-toggle="modal"
+											data-target="#detail-pengguna-<?= $val->user_id;?>">detail</button>
+									</td>
 
 									<div id="detail-pengguna-<?= $val->user_id;?>" class="modal fade" tabindex="-1"
 										role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -101,6 +112,54 @@
 															<?= $val->alamat == null ? 'Belum melengkapi' : $val->alamat;?>
 														</dd>
 													</dl>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
+
+									<div id="edit-pengguna-<?= $val->user_id;?>" class="modal fade" tabindex="-1"
+										role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Ubah Pengguna</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<form action="<?= site_url('admin/ubah_pengguna');?>" method="post">
+														<input type="hidden" name="user_id"
+															value="<?= $val->user_id;?>">
+														<div class="form-group">
+															<label for="inputNama">Nama pengguna</label>
+															<input type="text" class="form-control" id="inputNama"
+																name="nama" value="<?= $val->nama;?>" required>
+														</div>
+														<div class="form-group">
+															<label for="inputEmail">Email pengguna</label>
+															<input type="text" class="form-control" id="inputEmail"
+																name="email" value="<?= $val->email;?>" required>
+														</div>
+														<div class="form-group">
+															<label for="inputNomor">Nomor telepon pengguna</label>
+															<input type="text" class="form-control" id="inputNomor"
+																name="no_telp" value="<?= $val->no_telp;?>" required>
+														</div>
+														<div class="form-group">
+															<label for="inputAlamat">Alamat</label>
+															<textarea type="text" class="form-control" id="inputAlamat"
+																name="alamat" style="height: 150px;"
+																value="<?= $val->alamat;?>" required></textarea>
+														</div>
+														<div class="modal-footer px-0 mx-0">
+															<button type="button" class="btn btn-secondary"
+																data-dismiss="modal">Batal</button>
+															<button type="submit"
+																class="btn btn-primary">Simpan</button>
+														</div>
+													</form>
 												</div>
 											</div><!-- /.modal-content -->
 										</div><!-- /.modal-dialog -->

@@ -40,6 +40,14 @@
 	<!-- DataTables -->
 	<link href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.css" rel="stylesheet" type="text/css" />
 
+	<!-- plugin form -->
+	<link rel="stylesheet" href="<?= base_url();?>assets/node_modules/bootstrap-daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" href="<?= base_url();?>assets/node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+	<link rel="stylesheet" href="<?= base_url();?>assets/node_modules/select2/dist/css/select2.min.css">
+	<link rel="stylesheet" href="<?= base_url();?>assets/node_modules/selectric/public/selectric.css">
+	<link rel="stylesheet" href="<?= base_url();?>assets/node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+	<link rel="stylesheet" href="<?= base_url();?>assets/node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+
 	<link href="<?= base_url();?>assets/css/icons.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="<?= base_url();?>assets/css/custom.css">
 

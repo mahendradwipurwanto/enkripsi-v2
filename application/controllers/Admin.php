@@ -49,6 +49,12 @@ class Admin extends CI_Controller
         $this->templateback->view('admin/produk', $data);
     }
 
+    public function pengaturan()
+    {
+        $data['test'] = 123;
+        $this->templateback->view('admin/pengaturan', $data);
+    }
+
     function tambah_produk(){
         if (isset($_FILES['image'])) {
             $path = "berkas/produk/";
@@ -115,6 +121,26 @@ class Admin extends CI_Controller
         } else {
             $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba menghapus data produk. Coba lagi nanti !');
             redirect(site_url('admin/kelola-produk'));
+        }
+    }
+
+    function ubah_pengguna(){
+        if ($this->M_admin->ubah_pengguna() == true) {
+            $this->session->set_flashdata('notif_success', 'Berhasil mengubah data pengguna');
+            redirect($this->agent->referrer());
+        } else {
+            $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba mengubah data pengguna. Coba lagi nanti !');
+            redirect(site_url('admin/data-pengguna'));
+        }
+    }
+
+    function ubah_pengaturan(){
+        if ($this->M_admin->ubah_pengaturan() == true) {
+            $this->session->set_flashdata('notif_success', 'Berhasil mengubah data pengaturan');
+            redirect($this->agent->referrer());
+        } else {
+            $this->session->set_flashdata('notif_warning', 'Anda tidak melakukan perubahan data pengaturan!');
+            redirect(site_url('admin/pengaturan'));
         }
     }
 }

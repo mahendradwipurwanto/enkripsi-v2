@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+	<div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
 		<div class="login-brand mb-3">
 			<img src="<?= base_url();?>assets/images/logo.png" alt="logo" width="100" class="shadow-light logo-brand">
 		</div>
@@ -24,6 +24,14 @@
 							required>
 						<div class="invalid-feedback">
 							Masukkan nomor telepon anda
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="alamat">Alamat</label>
+						<textarea id="alamat" type="text" class="form-control" style="height: 150px;" name="alamat" autofocus
+							required></textarea>
+						<div class="invalid-feedback">
+							Masukkan alamat anda
 						</div>
 					</div>
 

@@ -63,22 +63,25 @@ class M_home extends CI_Model
     }
 
     function updateJumlahProduk($id, $jumlah){
-        $produk = $this->db->get_where('tb_produk', ['id' => $id])->row();
+        // $produk = $this->db->get_where('tb_produk', ['id' => $id])->row();
 
-        $stok_baru = $produk->stok-$jumlah;
+        // $stok_baru = $produk->stok-$jumlah;
         $this->db->where('id', $id);
-        $this->db->update('tb_produk', ['stok' => $stok_baru]);
+        $this->db->update('tb_produk', ['stok' => $jumlah]);
     }
 
 
-    function tambah_checkout(){
+    function tambah_checkout($bukti){
         $this->db->trans_strict(false);
 
+        $metode = $this->input->post('metode');
         $catatan = $this->input->post('catatan');
 
         $data = [
             'user_id' => $this->session->userdata('user_id'),
             'catatan' => $catatan,
+            'metode' => $metode,
+            'bukti_bayar' => $bukti,
             'created_at' => time()
         ];
         $this->db->trans_begin();

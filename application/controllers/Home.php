@@ -22,6 +22,7 @@ class Home extends CI_Controller
     public function index()
     {
         // $this->session->unset_userdata('keranjang');
+        // ej($this->session->userdata('keranjang'));
         $this->add_pengunjung();
         if($this->input->get('cari')){
             $data['produk'] = $this->M_home->get_produkHome($this->input->get('cari'));
@@ -68,18 +69,23 @@ class Home extends CI_Controller
             $produk_id = $this->input->post('id');
             $produk = $this->input->post('produk');
             $gambar = $this->input->post('gambar');
-            $jumlah = $this->input->post('jumlah');
+            $stok = (int)$this->input->post('stok');
+            $jumlah = (int)$this->input->post('jumlah');
+
+            $new_stok = $stok - $jumlah;
+
+            $this->M_home->updateJumlahProduk($produk_id, $new_stok);
 
             $new_cart = [
                 'produk_id' => $produk_id,
                 'produk' => $produk,
                 'gambar' => $gambar,
-                'jumlah' => $jumlah
+                'stok' => $new_stok,
+                'jumlah' => $jumlah,
+                'time' => date('H:i').' WIB'
             ];
 
             array_push($cart, $new_cart);
-
-            $this->M_home->updateJumlahProduk($produk_id, $jumlah);
             
             $this->session->set_userdata(['keranjang' => $cart]);
             // ej($this->session->userdata('keranjang'));
@@ -118,7 +124,10 @@ class Home extends CI_Controller
             redirect(site_url('otp'));
         }
 
-        if ($this->M_home->tambah_checkout() == true) {
+        $path = "berkas/pembayaran/";
+        $upload = $this->uploader->uploadImage($_FILES['image'], $path);
+
+        if ($this->M_home->tambah_checkout($upload['filename']) == true) {
             $this->session->unset_userdata('keranjang');
             $this->session->set_flashdata('notif_success', 'Berhasil menambahkan produk ke checkout anda');
             redirect($this->agent->referrer());
@@ -126,5 +135,20 @@ class Home extends CI_Controller
             $this->session->set_flashdata('notif_warning', 'terjadi kesalahan, saat mencoba menambahkan produk ke checkout anda. Coba lagi nanti !');
             redirect($this->agent->referrer());
         }
+    }
+
+    public function delete_checkout(){
+
+            foreach ($this->session->userdata('keranjang') as $key => $val):
+                $produk_id = (int) $val['produk_id'];
+                $stok = (int) $val['stok'];
+                $jumlah = (int) $val['jumlah'];
+                $new_stok = $stok + $jumlah;
+                
+                $this->M_home->updateJumlahProduk($produk_id, $new_stok);
+            endforeach;
+            $this->session->unset_userdata('keranjang');
+            $this->session->set_flashdata('notif_success', 'Berhasil mengosongkan keranjang anda');
+            redirect($this->agent->referrer());
     }
 }

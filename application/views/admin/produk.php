@@ -7,6 +7,12 @@
 	</div>
 </div>
 <div class="section-body">
+	<h2 class="section-title">Data produk</h2>
+	<p class="section-lead">
+		Kelola semua data produk diwebsitemu
+	</p>
+
+	<div id="output-status"></div>
 	<div class="row">
 		<div class="col-xl-12">
 			<div class="card">

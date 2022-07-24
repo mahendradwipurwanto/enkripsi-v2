@@ -108,8 +108,9 @@ class Admin extends CI_Controller
             $path = "berkas/produk/";
             $upload = $this->uploader->uploadImage($_FILES['image'], $path);
             // ej($upload);
+            $file = isset($upload['filename']) ? $upload['filename'] : null;
             if ($upload == true) {
-                if ($this->M_admin->edit_produk($upload['filename']) == true) {
+                if ($this->M_admin->edit_produk($file) == true) {
 
                     $this->session->set_flashdata('notif_success', 'Berhasil mengubah data produk');
                     redirect($this->agent->referrer());

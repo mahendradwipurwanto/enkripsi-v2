@@ -15,7 +15,7 @@
 	<div id="output-status"></div>
 	<div class="row">
 		<div class="col-md-8">
-			<form id="setting-form" action="<?= site_url('admin/ubah_pengaturan');?>" method="post">
+			<form id="setting-form" action="<?= site_url('admin/ubah_pengaturanInfo');?>" method="post">
 				<input type="hidden" name="key" value="web_title">
 				<div class="card" id="settings-card">
 					<div class="card-body">
@@ -25,8 +25,15 @@
 							<label for="site-title" class="form-control-label col-sm-3 text-md-right">Judul
 								website</label>
 							<div class="col-sm-6 col-md-9">
-								<input type="text" name="value" class="form-control" id="site-title"
-									value="<?= $web_title;?>">
+								<input type="text" name="judul" class="form-control" id="site-title"
+									value="<?= $web_title;?>" required>
+							</div>
+						</div>
+						<div class="form-group row align-items-center">
+							<label for="kode" class="form-control-label col-sm-3 text-md-right">Kode dekripsi</label>
+							<div class="col-sm-6 col-md-9">
+								<input type="text" name="kode" class="form-control" id="kode" minlength="16" maxlength="16"
+									value="<?= $kode;?>" required>
 							</div>
 						</div>
 						<div class="form-group row align-items-center">
@@ -49,6 +56,7 @@
 							<div class="col-sm-6 col-md-9">
 								<a href="<?= site_url('admin/bypass_otp/false');?>" class="btn <?= $bypass_otp == 'false' ? 'btn-primary' : 'btn_secondary';?> btn-sm">Ya</a>
 								<a href="<?= site_url('admin/bypass_otp/true');?>" class="btn <?= $bypass_otp == 'true' ? 'btn-primary' : 'btn_secondary';?> btn-sm">Tidak</a>
+								<small class="text-muted ml-2">Pengguna akan diharuskan melakukan proses verifikasi kode OTP melalui email pendaftaran jika OTP diaktifkan</small>
 							</div>
 						</div>
 					</div>

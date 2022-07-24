@@ -1,5 +1,5 @@
 <div class="section-header">
-	<h1>Dashboard</h1>
+	<h1>Pengguna</h1>
 	<div class="section-header-breadcrumb">
 		<div class="breadcrumb-item"><a href="<?= site_url('admin');?>">Dashboard</a></div>
 		<div class="breadcrumb-item">Kelola data</div>
@@ -17,7 +17,10 @@
 		<div class="col-xl-12">
 			<div class="card">
 				<div class="card-body">
-					<h5 class="header-title pb-3 mt-0">Data Pengguna</h5>
+					<h5 class="header-title pb-3 mt-0">Data Pengguna
+						<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"
+							data-target="#decrypt"><?= $this->session->userdata('decrypt') == true ? 'encrypt' : 'decrypt' ;?></button>
+					</h5>
 					<div class="table-responsive">
 						<table class="table table-hover table-striped dt-responsive nowrap"
 							style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatable-buttons">
@@ -175,3 +178,35 @@
 		</div>
 	</div>
 </div>
+
+
+<div id="decrypt" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">
+					<?= $this->session->userdata('decrypt') == true ? 'Encrypt' : 'Decrypt' ;?> data pengguna</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="<?= site_url('admin/decrypt');?>" method="post">
+					<p>Apakah anda yakin ingin
+						men-<i><?= $this->session->userdata('decrypt') == true ? 'encrypt' : 'decrypt' ;?></i> data
+						pengguna?</p>
+					<div class="form-group">
+						<input type="text" class="form-control" maxlength="16" minlength="16" name="kode"
+							placeholder="Masukkan kode untuk melanjutkan" required>
+					</div>
+					<div class="modal-footer px-0 mx-0">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit"
+							class="btn btn-primary"><?= $this->session->userdata('decrypt') == true ? 'Encrypt' : 'Decrypt' ;?>
+							data</button>
+					</div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

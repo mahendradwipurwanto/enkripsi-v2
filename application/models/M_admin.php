@@ -24,6 +24,12 @@ class M_admin extends CI_Model
         return $arrStatistik;
     }
 
+    public function getSettingsValue($key)
+    {
+        $query = $this->db->get_where('tb_settings', ['key' => $key]);
+        return $query->row()->value;
+    }
+
     function get_checkout(){
         // $this->db->select('a.*, b.nama, b.no_telp, b.profil, c.produk, c.gambar, c.harga');
         // $this->db->from('tb_checkout a');
@@ -165,6 +171,19 @@ class M_admin extends CI_Model
         $this->db->where('user_id', $user_id);
         $this->db->update('tb_auth', $data);
         return true;
+    }
+
+    function ubah_pengaturanInfo()
+    {
+        $judul = $this->input->post('judul');
+        $kode = $this->input->post('kode');
+        $this->db->where('key', 'web_title');
+        $this->db->update('tb_settings', ['value' => $judul]);
+        $this->db->where('key', 'kode');
+        $this->db->update('tb_settings', ['value' => $kode]);
+
+        return true;
+
     }
 
     function ubah_pengaturan()

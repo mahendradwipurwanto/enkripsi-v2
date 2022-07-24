@@ -407,7 +407,8 @@ insert  into `tb_settings`(`key`,`value`,`desc`,`created_at`,`modified_at`,`is_d
 ('web_desc','This is Base Project Template',NULL,1653641032,0,0),
 ('web_icon','favicon.ico',NULL,1653641032,0,0),
 ('web_logo','favicon.ico',NULL,1653641032,0,0),
-('web_title','Enkripsi AES',NULL,1653641032,0,0);
+('web_title','Enkripsi AES',NULL,1653641032,0,0),
+('kode', '1234123412341234', NULL, 1653641032, 0, 0);
 
 /*Table structure for table `tb_user` */
 

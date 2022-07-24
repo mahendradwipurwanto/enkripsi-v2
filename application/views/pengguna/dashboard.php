@@ -48,14 +48,8 @@
 							</div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"
-						data-target="#decrypt"><?= $this->session->userdata('decrypt') == true ? 'encrypt' : 'decrypt' ;?></button>
-					<?php if($this->session->userdata('decrypt') == true):?>
 					<button type="button" class="btn btn-primary btn-sm float-right mr-2" data-toggle="modal"
 						data-target="#ubah-pengguna">ubah data diri</button>
-					<?php else:?>
-					<button type="button" class="btn btn-primary btn-sm float-right mr-2" data-toggle="modal" data-target="#dekripsi-dulu">ubah data diri</button>
-					<?php endif;?>
 				</div>
 			</div>
 		</div>

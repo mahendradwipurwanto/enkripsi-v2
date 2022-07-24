@@ -39,14 +39,14 @@ class Pengguna extends CI_Controller
         $data['checkout'] = $this->M_pengguna->get_checkoutPengguna($this->session->userdata('user_id'));
         $user = $this->M_pengguna->get_dataPengguna($this->session->userdata('user_id'));
 
-        if($this->session->userdata('decrypt') == false){
-            $aes = new Aes(randomString(16));
+        // if($this->session->userdata('decrypt') == false){
+        //     $aes = new Aes(randomString(16));
 
-            $user->nama     = bin2hex($aes->encrypt($user->nama));
-            $user->email    = bin2hex($aes->encrypt($user->email));
-            $user->no_telp  = bin2hex($aes->encrypt($user->no_telp));
-            $user->alamat   = bin2hex($aes->encrypt($user->alamat));
-        }
+        //     $user->nama     = bin2hex($aes->encrypt($user->nama));
+        //     $user->email    = bin2hex($aes->encrypt($user->email));
+        //     $user->no_telp  = bin2hex($aes->encrypt($user->no_telp));
+        //     $user->alamat   = bin2hex($aes->encrypt($user->alamat));
+        // }
 
         $data['user'] = $user;
 

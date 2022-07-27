@@ -22,7 +22,7 @@ CREATE TABLE `tb_auth` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `status` int(5) NOT NULL DEFAULT 0,
-  `role` int(5) NOT NULL DEFAULT 2,
+  `role` int(5) NOT NULL DEFAULT 2 COMMENT '1: Admin, 2: Pengguna, 3: Operator',
   `aktivasi` varchar(255) DEFAULT NULL,
   `otp` varchar(255) DEFAULT NULL,
   `expired_otp` varchar(255) DEFAULT NULL,
@@ -30,13 +30,15 @@ CREATE TABLE `tb_auth` (
   `created_at` int(11) NOT NULL DEFAULT 0,
   `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_auth` */
 
 insert  into `tb_auth`(`user_id`,`email`,`password`,`status`,`role`,`aktivasi`,`otp`,`expired_otp`,`modified_at`,`created_at`,`is_deleted`) values 
-(5,'admin@tokoproduk.com','$2y$10$31CQBgl.x.HsutNvGn6IaucdHM8tpyp4/ymL4qF7IpYm4T/QBGTYO',1,1,'0f49f2360cfbcfb6f0e033f40faff81437ba612bf45b15ebdba9497ccff2d2488c7b7adb89b011b4aec44e01c2647c22f1d9d91d92aa17c14dbaa1b7bc9ce7fcn5d3vWDzwKCfCnKRYtG8m8A+2svUN8hIQ3JOJcN96bw=','eda15e5c1f2778f0a2b8323f0914ca8fcc530e55fef4e5d9ad4e6d214509ac3f3bcac94d55d994942c54cb9ba79fcf068bf8c8422f89d0c8b5b45e2a4a917b6b8fo6H+TYmVxHfBFhrWLw0TlJ9VfhB8+I1QBjLQN73Vo=','1653839610',1658662716,0,0),
-(6,'ngodingin.indonesia@gmail.com','$2y$10$prc9lU9IghAD8LRnWNSN0OXWwR4AElkomSSFLZTXXJ2w3XeMJyPXG',1,2,'c209cb53caf5e85f3bad79c9f072f32de5aaeeab1127009dd773050e493e28a55741673124cf738ad826399314b911407bc9702bd3261319aec7832c859b162bYSyyhuOvW0PrYvK/rem8JU+U8orOHN/KJLWjcY8hi/Y=','68991f20177b57f8ff63f9e331b266eba7747500f970f7010025f9e17eb3e54bd19cfc88edd1b67500d9c6f9a6a5c2f058b10362827fd78ad0dd5255aead64b4zOEJmt+ALPeKlzycWCB/c9udgGeOoZdE1gfaLzxo9Bo=','1658600330',1658662417,1656229653,0);
+(5,'admin@tokoproduk.com','$2y$10$31CQBgl.x.HsutNvGn6IaucdHM8tpyp4/ymL4qF7IpYm4T/QBGTYO',1,1,'0f49f2360cfbcfb6f0e033f40faff81437ba612bf45b15ebdba9497ccff2d2488c7b7adb89b011b4aec44e01c2647c22f1d9d91d92aa17c14dbaa1b7bc9ce7fcn5d3vWDzwKCfCnKRYtG8m8A+2svUN8hIQ3JOJcN96bw=','eda15e5c1f2778f0a2b8323f0914ca8fcc530e55fef4e5d9ad4e6d214509ac3f3bcac94d55d994942c54cb9ba79fcf068bf8c8422f89d0c8b5b45e2a4a917b6b8fo6H+TYmVxHfBFhrWLw0TlJ9VfhB8+I1QBjLQN73Vo=','1653839610',1658933601,0,0),
+(6,'ngodingin.indonesia@gmail.com','$2y$10$prc9lU9IghAD8LRnWNSN0OXWwR4AElkomSSFLZTXXJ2w3XeMJyPXG',1,2,'c209cb53caf5e85f3bad79c9f072f32de5aaeeab1127009dd773050e493e28a55741673124cf738ad826399314b911407bc9702bd3261319aec7832c859b162bYSyyhuOvW0PrYvK/rem8JU+U8orOHN/KJLWjcY8hi/Y=','68991f20177b57f8ff63f9e331b266eba7747500f970f7010025f9e17eb3e54bd19cfc88edd1b67500d9c6f9a6a5c2f058b10362827fd78ad0dd5255aead64b4zOEJmt+ALPeKlzycWCB/c9udgGeOoZdE1gfaLzxo9Bo=','1658600330',1658664453,1656229653,0),
+(9,'developpertech@gmail.com','$2y$10$GUaj0w6nNE6LEBVwcEC82OKxtB.1qTP1IkofjU.HUAqQiYg8zuuNW',1,3,NULL,NULL,NULL,1658932821,0,1),
+(10,'mahendradwipurwanto@gmail.com','$2y$10$UClGGd.pI12ibSAQQjlt5Oo0ykgvVzJrmxnO4grK4nQgR2L.QONQG',1,2,'237169e74e51686c0c0d84ea884b9b72a9e0d9faffdffe0e3c19ea1ddd1ead8ce261954dde263351474fe814877ffe93145fe49c2a782ad1f6344bc5cd79f4daOOgauSJMxOADeJ+tc4gxzFno0Iw7APaNzdXFf92zmWU=',NULL,NULL,1658933668,1658933631,0);
 
 /*Table structure for table `tb_checkout` */
 
@@ -56,35 +58,13 @@ CREATE TABLE `tb_checkout` (
   CONSTRAINT `tb_checkout_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_auth` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
-/*Table structure for table `tb_produk` */
-
-DROP TABLE IF EXISTS `tb_produk`;
-
-CREATE TABLE `tb_produk` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `produk` varchar(50) DEFAULT NULL,
-  `gambar` varchar(255) DEFAULT 'assets/images/placeholder.png',
-  `stok` int(20) NOT NULL DEFAULT 0,
-  `harga` int(20) DEFAULT NULL,
-  `keterangan` text DEFAULT NULL,
-  `created_at` int(20) NOT NULL DEFAULT 0,
-  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-
-/*Data for the table `tb_produk` */
-
-insert  into `tb_produk`(`id`,`produk`,`gambar`,`stok`,`harga`,`keterangan`,`created_at`,`is_deleted`) values 
-(9,'Akun minecraft','assets/images/placeholder.png',50,25000,'',0,0),
-(10,'Youtube premium','assets/images/placeholder.png',100,1750,'',0,0);
-
 /*Data for the table `tb_checkout` */
 
 insert  into `tb_checkout`(`id`,`user_id`,`catatan`,`metode`,`bukti_bayar`,`status`,`created_at`,`is_deleted`) values 
 (14,6,'test','BCA','-',1,1656230123,0),
 (15,6,'','BCA','-',1,1658597895,0),
 (17,6,'124','BCA','-',1,1658598028,0),
-(18,6,'test','BCA','berkas/pembayaran/1658658066.jpg',1,1658658066,0);
+(18,6,'test','BCA','berkas/pembayaran/1658658066.jpg',2,1658658066,0);
 
 /*Table structure for table `tb_checkout_detail` */
 
@@ -119,7 +99,7 @@ CREATE TABLE `tb_pengunjung` (
   `device` text DEFAULT NULL,
   `created_at` int(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=425 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=442 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_pengunjung` */
 
@@ -373,7 +353,46 @@ insert  into `tb_pengunjung`(`id`,`device`,`created_at`) values
 (421,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658662411),
 (422,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658662417),
 (423,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658662684),
-(424,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658663714);
+(424,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658663714),
+(425,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658664225),
+(426,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658664393),
+(427,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658664434),
+(428,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658664453),
+(429,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658667964),
+(430,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658675344),
+(431,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658678950),
+(432,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658931058),
+(433,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658931063),
+(434,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658932536),
+(435,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658932815),
+(436,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658932824),
+(437,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658933596),
+(438,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658933608),
+(439,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658933668),
+(440,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658933847),
+(441,'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',1658933861);
+
+/*Table structure for table `tb_produk` */
+
+DROP TABLE IF EXISTS `tb_produk`;
+
+CREATE TABLE `tb_produk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `produk` varchar(50) DEFAULT NULL,
+  `gambar` varchar(255) DEFAULT 'assets/images/placeholder.png',
+  `stok` int(20) NOT NULL DEFAULT 0,
+  `harga` int(20) DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `created_at` int(20) NOT NULL DEFAULT 0,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tb_produk` */
+
+insert  into `tb_produk`(`id`,`produk`,`gambar`,`stok`,`harga`,`keterangan`,`created_at`,`is_deleted`) values 
+(9,'Akun minecraftd','berkas/produk/1658679146.jpg',50,25000,'',0,0),
+(10,'Youtube premium','assets/images/placeholder.png',100,1750,'',0,0);
 
 /*Table structure for table `tb_settings` */
 
@@ -393,6 +412,7 @@ CREATE TABLE `tb_settings` (
 
 insert  into `tb_settings`(`key`,`value`,`desc`,`created_at`,`modified_at`,`is_deleted`) values 
 ('bypass_otp','true',NULL,1653641032,0,0),
+('kode','1234123412341234',NULL,0,0,0),
 ('mailer_alias','Toko Produk Indonesia',NULL,1653641032,0,0),
 ('mailer_host','smtp.gmail.com',NULL,1653641032,0,0),
 ('mailer_mode','0',NULL,1653641032,0,0),
@@ -407,8 +427,7 @@ insert  into `tb_settings`(`key`,`value`,`desc`,`created_at`,`modified_at`,`is_d
 ('web_desc','This is Base Project Template',NULL,1653641032,0,0),
 ('web_icon','favicon.ico',NULL,1653641032,0,0),
 ('web_logo','favicon.ico',NULL,1653641032,0,0),
-('web_title','Enkripsi AES',NULL,1653641032,0,0),
-('kode', '1234123412341234', NULL, 1653641032, 0, 0);
+('web_title','Enkripsi AES',NULL,1653641032,0,0);
 
 /*Table structure for table `tb_user` */
 
@@ -420,15 +439,20 @@ CREATE TABLE `tb_user` (
   `profil` varchar(255) DEFAULT 'assets/images/profile.png',
   `no_telp` varchar(20) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
+  `jk` char(1) DEFAULT 'L',
+  `pekerjaan` varchar(50) DEFAULT NULL,
+  `gaji` varchar(50) DEFAULT NULL,
   KEY `user_id` (`user_id`),
   CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_auth` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_user` */
 
-insert  into `tb_user`(`user_id`,`nama`,`profil`,`no_telp`,`alamat`) values 
-(5,'Admin','assets/images/profile.png','085157444518',NULL),
-(6,'Ngodingin','assets/images/profile.png','085157444518',NULL);
+insert  into `tb_user`(`user_id`,`nama`,`profil`,`no_telp`,`alamat`,`jk`,`pekerjaan`,`gaji`) values 
+(5,'Admin','assets/images/profile.png','085157444518',NULL,'L',NULL,NULL),
+(6,'Ngodingin','assets/images/profile.png','085157444518',NULL,'L',NULL,NULL),
+(9,'Ngodingin Indonesia','assets/images/profile.png',NULL,NULL,'L',NULL,NULL),
+(10,'Mahendra Dwi Purwanto','assets/images/profile.png','085785111746','Perum Bumi Ardimulyo BLOK W 9','L','Programmer','Rp. 6.000.000 s/d Rp 10.000.000');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

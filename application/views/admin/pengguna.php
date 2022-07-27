@@ -42,10 +42,27 @@
 									<td>
 										<img src="<?= base_url();?><?= $val->profil;?>" alt=""
 											class="thumb-sm rounded-circle mr-2">
+										<?php if($this->session->userdata('decrypt') == false):?>
+										<?= substr($val->nama, 0, 25);?>...
+										<?php else:;?>
 										<?= $val->nama;?>
+										<?php endif;?>
 									</td>
-									<td><?= $val->email;?></td>
-									<td><?= $val->no_telp == null ? '-' : $val->nama;?></td>
+									<td>
+										<?php if ($this->session->userdata('decrypt') == false):?>
+										<?= substr($val->email, 0, 25);?>...
+										<?php else:;?>
+										<?= $val->email;?>
+										<?php endif;?>
+									</td>
+									<td>
+
+										<?php if ($this->session->userdata('decrypt') == false):?>
+										<?= substr($val->no_telp, 0, 25);?>...
+										<?php else:;?>
+										<?= $val->no_telp;?>
+										<?php endif;?>
+									</td>
 									<td class="text-center">
 										<?php if($val->status == 0):?>
 										<span class="badge badge-boxed badge-soft-secondary">belum aktivasi</span>
@@ -107,8 +124,18 @@
 															<?php endif;?>
 														</dd>
 
+														<dt class="col-sm-4">Jenis Kelamin</dt>
+														<dd class="col-sm-8">
+															<?= $val->jk == 'L' ? 'Laki-laki' : 'Perempuan';?></dd>
+
 														<dt class="col-sm-4">No. Telepon</dt>
 														<dd class="col-sm-8"><?= $val->no_telp;?></dd>
+
+														<dt class="col-sm-4">Pekerjaan</dt>
+														<dd class="col-sm-8"><?= $val->pekerjaan;?></dd>
+
+														<dt class="col-sm-4">Gaji</dt>
+														<dd class="col-sm-8"><?= $val->gaji;?></dd>
 
 														<dt class="col-sm-4">Alamat</dt>
 														<dd class="col-sm-8">
@@ -146,15 +173,58 @@
 																name="email" value="<?= $val->email;?>" required>
 														</div>
 														<div class="form-group">
+															<label for="inputJk">Jenis kelamin</label>
+															<select name="jk" id="inputJk" class="form-control"
+																required>
+																<optgroup label="current">
+																	<option value="<?= $val->jk;?>">
+																		<?= $val->jk == 'L' ? 'Laki-laki' : 'Perempuan';?>
+																	</option>
+																</optgroup>
+																<optgroup label="change">
+																	<option value="L">Laki-Laki</option>
+																	<option value="P">Perempuan</option>
+																</optgroup>
+															</select>
+														</div>
+														<div class="form-group">
 															<label for="inputNomor">Nomor telepon pengguna</label>
 															<input type="text" class="form-control" id="inputNomor"
 																name="no_telp" value="<?= $val->no_telp;?>" required>
 														</div>
 														<div class="form-group">
+															<label for="inputPekerjaan">Pekerjaan</label>
+															<input type="text" class="form-control" id="inputPekerjaan"
+																name="pekerjaan" value="<?= $val->pekerjaan;?>"
+																required>
+														</div>
+														<div class="form-group">
+															<label for="inputGaji">Gaji</label>
+															<select name="gaji" id="inputGaji" class="form-control"
+																required>
+																<optgroup label="current">
+																	<option value="<?= $val->gaji;?>"><?= $val->gaji;?>
+																	</option>
+																</optgroup>
+																<optgroup label="change">
+																	<option value="Dibawah < Rp 1.000.000">Dibawah < Rp
+																			1.000.000</option> <option
+																			value="Rp. 1.000.000 s/d 3.000.000">Rp.
+																			1.000.000 s/d Rp. 3.000.000</option>
+																	<option value="Rp. 3.000.000 s/d Rp 6.000.000">Rp.
+																		3.000.000 s/d Rp 5.000.000</option>
+																	<option value="Rp. 6.000.000 s/d Rp 10.000.000">Rp.
+																		5.000.000 s/d Rp 10.000.000</option>
+																	<option value="Diatas Rp 10.000.000">Diatas Rp
+																		10.000.000</option>
+																</optgroup>
+															</select>
+														</div>
+														<div class="form-group">
 															<label for="inputAlamat">Alamat</label>
 															<textarea type="text" class="form-control" id="inputAlamat"
 																name="alamat" style="height: 150px;"
-																value="<?= $val->alamat;?>" required></textarea>
+																required><?= $val->alamat;?></textarea>
 														</div>
 														<div class="modal-footer px-0 mx-0">
 															<button type="button" class="btn btn-secondary"

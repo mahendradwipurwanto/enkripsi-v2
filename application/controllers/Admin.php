@@ -24,10 +24,10 @@ class Admin extends CI_Controller
             redirect('login');
         }
 
-        if ($this->session->userdata('role') == 2) {
-            $this->session->set_flashdata('warning', "Kamu tidak memiliki akses");
-            redirect(base_url());
-        }
+        // if ($this->session->userdata('role') == 2) {
+        //     $this->session->set_flashdata('warning', "Kamu tidak memiliki akses");
+        //     redirect(base_url());
+        // }
     }
 
     public function index()
@@ -62,10 +62,12 @@ class Admin extends CI_Controller
             $aes = new Aes($this->M_admin->getSettingsValue('kode'));
 
             foreach ($pengguna as $key => $val) {
-                $pengguna[$key]->nama     = bin2hex($aes->encrypt($val->nama));
-                $pengguna[$key]->email    = bin2hex($aes->encrypt($val->email));
-                $pengguna[$key]->no_telp  = bin2hex($aes->encrypt($val->no_telp));
-                $pengguna[$key]->alamat   = bin2hex($aes->encrypt($val->alamat));
+                $pengguna[$key]->nama       = bin2hex($aes->encrypt($val->nama));
+                $pengguna[$key]->email      = bin2hex($aes->encrypt($val->email));
+                $pengguna[$key]->no_telp    = bin2hex($aes->encrypt($val->no_telp));
+                $pengguna[$key]->alamat     = bin2hex($aes->encrypt($val->alamat));
+                $pengguna[$key]->pekerjaan  = bin2hex($aes->encrypt($val->pekerjaan));
+                $pengguna[$key]->gaji       = bin2hex($aes->encrypt($val->gaji));
             }
         }
 

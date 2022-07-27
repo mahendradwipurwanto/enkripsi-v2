@@ -37,8 +37,26 @@
 						</div>
 						<div class="media">
 							<div class="media-body w-100">
+								<h6 class="mb-1">Jenis Kelamin</h6>
+								<p><?= $user->jk == 'L' ? 'Laki-laki' : 'Perempuan';?></p>
+							</div>
+						</div>
+						<div class="media">
+							<div class="media-body w-100">
 								<h6 class="mb-1">Nomor Telepon</h6>
 								<p><?= $user->no_telp;?></p>
+							</div>
+						</div>
+						<div class="media">
+							<div class="media-body w-100">
+								<h6 class="mb-1">Pekerjaan</h6>
+								<p><?= $user->pekerjaan;?></p>
+							</div>
+						</div>
+						<div class="media">
+							<div class="media-body w-100">
+								<h6 class="mb-1">Gaji</h6>
+								<p><?= $user->gaji;?></p>
 							</div>
 						</div>
 						<div class="media">
@@ -149,7 +167,8 @@
 	</div>
 </div>
 
-<div id="dekripsi-dulu" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div id="dekripsi-dulu" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -222,14 +241,46 @@
 							required>
 					</div>
 					<div class="form-group">
+						<label for="inputJk">Jenis kelamin</label>
+						<select name="jk" id="inputJk" class="form-control" required>
+							<optgroup label="current">
+								<option value="<?= $user->jk;?>"><?= $user->jk == 'L' ? 'Laki-laki' : 'Perempuan';?>
+								</option>
+							</optgroup>
+							<optgroup label="change">
+								<option value="L">Laki-Laki</option>
+								<option value="P">Perempuan</option>
+							</optgroup>
+						</select>
+					</div>
+					<div class="form-group">
 						<label for="inputNomor">Nomor telepon pengguna</label>
 						<input type="text" class="form-control" id="inputNomor" name="no_telp"
 							value="<?= $user->no_telp;?>" required>
 					</div>
 					<div class="form-group">
+						<label for="inputPekerjaan">Pekerjaan</label>
+						<input type="text" class="form-control" id="inputPekerjaan" name="pekerjaan"
+							value="<?= $user->pekerjaan;?>" required>
+					</div>
+					<div class="form-group">
+						<label for="inputGaji">Gaji</label>
+						<select name="gaji" id="inputGaji" class="form-control" required>
+							<optgroup label="current">
+								<option value="<?= $user->gaji;?>"><?= $user->gaji;?></option>
+							</optgroup>
+							<optgroup label="change">
+								<option value="Dibawah < Rp 1.000.000">Dibawah < Rp 1.000.000</option> <option
+										value="Rp. 1.000.000 s/d 3.000.000">Rp. 1.000.000 s/d Rp. 3.000.000</option>
+								<option value="Rp. 3.000.000 s/d Rp 6.000.000">Rp. 3.000.000 s/d Rp 5.000.000</option>
+								<option value="Rp. 6.000.000 s/d Rp 10.000.000">Rp. 5.000.000 s/d Rp 10.000.000</option>
+								<option value="Diatas Rp 10.000.000">Diatas Rp 10.000.000</option>
+							</optgroup>
+						</select>
+					</div>
+					<div class="form-group">
 						<label for="inputAlamat">Alamat</label>
-						<textarea type="text" class="form-control" id="inputAlamat" name="alamat" style="height: 150px;"
-							value="<?= $user->alamat;?>" required></textarea>
+						<textarea type="text" class="form-control" id="inputAlamat" name="alamat" style="height: 150px;" required><?= $user->alamat;?></textarea>
 					</div>
 					<div class="modal-footer px-0 mx-0">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

@@ -19,17 +19,43 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="no_telp">Nomor telepon</label>
-						<input id="no_telp" type="text" class="form-control" maxlength="13" name="no_telp" autofocus
-							required>
+						<label for="inputJk">Jenis kelamin</label>
+						<select name="jk" id="inputJk" class="form-control" autofocus required>
+							<option value="L">Laki-Laki</option>
+							<option value="P">Perempuan</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="inputNomor">Nomor telepon pengguna</label>
+						<input type="text" class="form-control" id="inputNomor" name="no_telp" autofocus required>
 						<div class="invalid-feedback">
-							Masukkan nomor telepon anda
+							Masukkan Nomor telepon anda dengan benar
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPekerjaan">Pekerjaan</label>
+						<input type="text" class="form-control" id="inputPekerjaan" name="pekerjaan" autofocus required>
+						<div class="invalid-feedback">
+							Masukkan Pekerjaan anda dengan benar
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputGaji">Gaji</label>
+						<select name="gaji" id="inputGaji" class="form-control" autofocus required>
+							<option value="Dibawah < Rp 1.000.000">Dibawah < Rp 1.000.000</option> <option
+									value="Rp. 1.000.000 s/d 3.000.000">Rp. 1.000.000 s/d Rp. 3.000.000</option>
+							<option value="Rp. 3.000.000 s/d Rp 6.000.000">Rp. 3.000.000 s/d Rp 5.000.000</option>
+							<option value="Rp. 6.000.000 s/d Rp 10.000.000">Rp. 5.000.000 s/d Rp 10.000.000</option>
+							<option value="Diatas Rp 10.000.000">Diatas Rp 10.000.000</option>
+						</select>
+						<div class="invalid-feedback">
+							Masukkan Gaji anda dengan benar
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="alamat">Alamat</label>
-						<textarea id="alamat" type="text" class="form-control" style="height: 150px;" name="alamat" autofocus
-							required></textarea>
+						<textarea id="alamat" type="text" class="form-control" style="height: 150px;" name="alamat"
+							autofocus required></textarea>
 						<div class="invalid-feedback">
 							Masukkan alamat anda
 						</div>
@@ -43,19 +69,19 @@
 						</div>
 					</div>
 
-						<div class="form-group">
-							<label for="password" class="d-block">Password</label>
-							<input id="password" type="password" class="form-control pwstrength"
-								data-indicator="pwindicator" name="password" required>
-							<div id="pwindicator" class="pwindicator">
-								<div class="bar"></div>
-								<div class="label"></div>
-							</div>
+					<div class="form-group">
+						<label for="password" class="d-block">Password</label>
+						<input id="password" type="password" class="form-control pwstrength"
+							data-indicator="pwindicator" name="password" required>
+						<div id="pwindicator" class="pwindicator">
+							<div class="bar"></div>
+							<div class="label"></div>
 						</div>
-						<div class="form-group">
-							<label for="password2" class="d-block">Konfirmasi password</label>
-							<input id="password2" type="password" class="form-control" name="password_conf" required>
-						</div>
+					</div>
+					<div class="form-group">
+						<label for="password2" class="d-block">Konfirmasi password</label>
+						<input id="password2" type="password" class="form-control" name="password_conf" required>
+					</div>
 
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary btn-lg btn-block" id="submit-button">

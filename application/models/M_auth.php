@@ -74,17 +74,23 @@ class M_auth extends CI_Model
     public function add_user($data_auth)
     {
         $nama           = htmlspecialchars($this->input->post('nama'));
+        $jk             = htmlspecialchars($this->input->post('jk'));
         $no_telp        = htmlspecialchars($this->input->post('no_telp'));
-        $alamat        = htmlspecialchars($this->input->post('alamat'));
+        $pekerjaan      = htmlspecialchars($this->input->post('pekerjaan'));
+        $alamat         = htmlspecialchars($this->input->post('alamat'));
+        $gaji           = $this->input->post('gaji');
 
         $this->db->insert('tb_auth', $data_auth);
 
         $data_user = array(
             'user_id'   => $this->db->insert_id(),
             'nama'      => $nama,
-            'profil'      => 'assets/images/profile.png',
+            'profil'    => 'assets/images/profile.png',
             'no_telp'   => $no_telp,
-            'alamat'   => $alamat
+            'alamat'    => $alamat,
+            'jk'        => $jk,
+            'pekerjaan' => $pekerjaan,
+            'gaji'      => $gaji
         );
 
         $this->db->insert('tb_user', $data_user);

@@ -163,12 +163,18 @@ class M_admin extends CI_Model
 
         $nama = $this->input->post('nama');
         $email = $this->input->post('email');
+        $jk = $this->input->post('jk');
         $no_telp = $this->input->post('no_telp');
+        $pekerjaan = $this->input->post('pekerjaan');
+        $gaji = $this->input->post('gaji');
         $alamat = $this->input->post('alamat');
         $data = [
             'nama' => $nama,
             'no_telp' => $no_telp,
-            'alamat' => $alamat
+            'alamat' => $alamat,
+            'jk' => $jk,
+            'pekerjaan' => $pekerjaan,
+            'gaji' => $gaji
         ];
 
         $this->db->where('user_id', $user_id);

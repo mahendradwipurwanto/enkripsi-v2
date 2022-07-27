@@ -92,6 +92,9 @@ class Authentication extends CI_Controller
                         if($user->role == 1){
                             $this->session->set_flashdata('success', "Selamat datang admin!");
                             redirect(site_url('admin'));
+                        }elseif($user->role == 3){
+                            $this->session->set_flashdata('success', "Selamat datang operator!");
+                            redirect(site_url('operator'));
                         }else{
                             $this->session->set_flashdata('success', "Selamat datang!");
                             redirect(site_url('home'));

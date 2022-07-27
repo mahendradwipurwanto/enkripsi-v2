@@ -43,7 +43,7 @@ class M_auth extends CI_Model
         $this->db->select('*');
         $this->db->from('tb_auth a');
         $this->db->join('tb_user b', 'a.user_id = b.user_id');
-        $this->db->where('a.email', $email);
+        $this->db->where(['a.email' => $email, 'is_deleted' => 0]);
         $query = $this->db->get();
     
         // jika hasil dari query diatas memiliki lebih dari 0 record
@@ -59,8 +59,8 @@ class M_auth extends CI_Model
         $this->db->select('*');
         $this->db->from('tb_auth a');
         $this->db->join('tb_user b', 'a.user_id = b.user_id');
-        $this->db->where('a.user_id', $user_id);
-        ;
+        $this->db->where(['a.user_id' => $user_id, 'is_deleted' => 0]);
+        
         $query = $this->db->get();
     
         // jika hasil dari query diatas memiliki lebih dari 0 record
@@ -81,8 +81,8 @@ class M_auth extends CI_Model
 
         $data_user = array(
             'user_id'   => $this->db->insert_id(),
-            'nama'      => 'assets/images/profile.png',
             'nama'      => $nama,
+            'profil'      => 'assets/images/profile.png',
             'no_telp'   => $no_telp,
             'alamat'   => $alamat
         );

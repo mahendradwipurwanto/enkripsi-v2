@@ -88,6 +88,16 @@ class M_admin extends CI_Model
         return $this->db->get()->result();
     }
 
+    function get_penggunaOperator(){
+        $this->db->select('*');
+        $this->db->from('tb_auth a');
+        $this->db->join('tb_user b', 'a.user_id = b.user_id');
+        $this->db->where(['a.is_deleted' => 0, 'role' => 3]);
+        $this->db->order_by('a.created_at DESC');
+
+        return $this->db->get()->result();
+    }
+
     // Produk
     function get_produk(){
         return $this->db->get_where('tb_produk', ['is_deleted' => 0])->result();    
@@ -205,5 +215,74 @@ class M_admin extends CI_Model
 
         return ($this->db->affected_rows() != 1) ? false : true;
 
+    }
+
+    function tambah_operator(){
+        $nama = $this->input->post('nama');
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+
+        $data = [
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'status' => 1,
+            'role' => 3
+        ];
+
+        $this->db->insert('tb_auth', $data);
+        
+        $data = [
+            'user_id'   => $this->db->insert_id(),
+            'nama' => $nama
+        ];
+
+        $this->db->insert('tb_user', $data);
+        return ($this->db->affected_rows() != 1) ? false : true;
+    }
+
+    function ubah_operator(){
+        $user_id = $this->input->post('user_id');
+
+        $nama = $this->input->post('nama');
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        
+        $data = [
+            'nama' => $nama
+        ];
+
+        $this->db->where('user_id', $user_id);
+        $this->db->update('tb_user', $data);
+
+        if(isset($password) && $password !== ''){
+            $data = [
+                'email' => $email,
+                'password' => password_hash($password, PASSWORD_DEFAULT)
+            ];
+        }else{
+            $data = [
+                'email' => $email
+            ];
+        }
+
+        $this->db->where('user_id', $user_id);
+        $this->db->update('tb_auth', $data);
+
+        return true;
+    }
+
+    function hapus_operator(){
+        $user_id = $this->input->post('user_id');
+
+        $this->db->where('user_id', $user_id);
+        $this->db->update('tb_auth', ['is_deleted' => 1]);
+        return ($this->db->affected_rows() != 1) ? false : true;
+    }
+
+    function verifikasi_pembayaran($id){
+
+        $this->db->where('id', $id);
+        $this->db->update('tb_checkout', ['status' => 2]);
+        return ($this->db->affected_rows() != 1) ? false : true;
     }
 }

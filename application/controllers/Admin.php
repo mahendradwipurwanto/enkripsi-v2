@@ -38,6 +38,18 @@ class Admin extends CI_Controller
         $this->templateback->view('admin/dashboard', $data);
     }
 
+    public function data_operator()
+    {
+        if($this->session->userdata('decrypt') == false){
+            $this->session->unset_userdata('decrypt');
+        }
+
+        $pengguna = $this->M_admin->get_penggunaOperator();
+        $data['pengguna'] = $pengguna;
+
+        $this->templateback->view('admin/operator', $data);
+    }
+
     public function data_pengguna()
     {
         if($this->session->userdata('decrypt') == false){
@@ -198,6 +210,46 @@ class Admin extends CI_Controller
         }else{
             $this->session->set_flashdata('warning', "Kode yang anda masukan salah !");
             redirect(site_url('admin/data-pengguna'));
+        }
+    }
+
+    function tambah_operator(){
+        if ($this->M_admin->tambah_operator() == true) {
+            $this->session->set_flashdata('notif_success', 'Berhasil menambahkan data operator');
+            redirect($this->agent->referrer());
+        } else {
+            $this->session->set_flashdata('notif_warning', 'Terjadi kesalahan, saat menambahkan data operator!');
+            redirect(site_url('admin/data-operator'));
+        }
+    }
+
+    function ubah_operator(){
+        if ($this->M_admin->ubah_operator() == true) {
+            $this->session->set_flashdata('notif_success', 'Berhasil mengubah data operator');
+            redirect($this->agent->referrer());
+        } else {
+            $this->session->set_flashdata('notif_warning', 'Terjadi kesalahan, saat mengubah data operator!');
+            redirect(site_url('admin/data-operator'));
+        }
+    }
+
+    function hapus_operator(){
+        if ($this->M_admin->hapus_operator() == true) {
+            $this->session->set_flashdata('notif_success', 'Berhasil menghapus data operator');
+            redirect($this->agent->referrer());
+        } else {
+            $this->session->set_flashdata('notif_warning', 'Terjadi kesalahan, saat menghapus data operator!');
+            redirect(site_url('admin/data-operator'));
+        }
+    }
+
+    function verifikasi_pembayaran($id){
+        if ($this->M_admin->verifikasi_pembayaran($id) == true) {
+            $this->session->set_flashdata('notif_success', 'Berhasil memverifikasi data transaksi');
+            redirect($this->agent->referrer());
+        } else {
+            $this->session->set_flashdata('notif_warning', 'Terjadi kesalahan, saat memverifikasi data transaksi!');
+            redirect(site_url('admin'));
         }
     }
 }

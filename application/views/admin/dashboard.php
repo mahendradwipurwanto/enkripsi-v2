@@ -96,6 +96,7 @@
 									<th>Total Produk</th>
 									<th>Metode</th>
 									<th>Bukti Pembayaran</th>
+									<th width="5%">Status</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -120,9 +121,23 @@
 										-
 										<?php endif;?>
 									</td>
-									<td width="10%" class="text-center"><button class="btn btn-primary btn-sm"
-											data-toggle="modal"
-											data-target="#detail-checkout-<?= $val['id'];?>">detail</button></td>
+									<td>
+										<?php if($val['status'] == 1):?>
+										<span class="badge badge-secondary">Belum diverifikasi</span>
+										<?php else:?>
+										<span class="badge badge-success">Sudah diverifikasi</span>
+										<?php endif;?>
+									</td>
+									<td width="10%" class="text-center">
+										<button class="btn btn-primary btn-sm" data-toggle="modal"
+											data-target="#detail-checkout-<?= $val['id'];?>">detail</button>
+										<?php if($this->session->userdata('role') == 3):?>
+										<?php if($val['status'] == 1):?>
+										<button class="btn btn-success btn-sm" data-toggle="modal"
+											data-target="#verifikasi-checkout-<?= $val['id'];?>">verifikasi</button>
+										<?php endif;?>
+										<?php endif;?>
+									</td>
 
 									<div id="bukti-bayar-<?= $val['id'];?>" class="modal fade" tabindex="-1"
 										role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -157,7 +172,8 @@
 												<div class="modal-body p-4">
 													<dl class="row mb-0">
 														<?php $noo = 1; foreach($val['keranjang'] as $item):?>
-														<dt class="col-sm-3">Produk <?= count($val['keranjang']) > 1 ? $noo++ : '';?></dt>
+														<dt class="col-sm-3">Produk
+															<?= count($val['keranjang']) > 1 ? $noo++ : '';?></dt>
 														<dd class="col-sm-9"><?= $item->produk;?> -
 															<?= number_format($item->jumlah);?> buah</dd>
 														<?php endforeach;?>
@@ -168,6 +184,34 @@
 													<hr>
 													<small class="text-secondary">Checkout pada
 														<?= date("d F Y - H:i", $val['created_at']);?> WIB</small>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
+
+									<div id="verifikasi-checkout-<?= $val['id'];?>" class="modal fade" tabindex="-1"
+										role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Hapus Operator</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<form
+														action="<?= site_url('admin/verifikasi_pembayaran/'.$val['id']);?>"
+														method="post">
+														<p>Apakah anda yakin ingin memverifikasi transaksi ini?</p>
+														<div class="modal-footer px-0 mx-0">
+															<button type="button" class="btn btn-secondary"
+																data-dismiss="modal">Batal</button>
+															<button type="submit" class="btn btn-success">Ya,
+																verifikasi</button>
+														</div>
+													</form>
 												</div>
 											</div><!-- /.modal-content -->
 										</div><!-- /.modal-dialog -->

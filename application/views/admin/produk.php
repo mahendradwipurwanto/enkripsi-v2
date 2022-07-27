@@ -18,15 +18,19 @@
 			<div class="card">
 				<div class="card-body">
 					<h5 class="header-title pb-3 mt-0">Data Produk
+						<?php if($this->session->userdata('role') == 3):?>
 						<button type="button" class="btn btn-primary float-right" data-toggle="modal"
 							data-target="#tambah">Tambah produk</button></h5>
+					<?php endif;?>
 					<div class="table-responsive">
 						<table class="table table-hover table-striped dt-responsive nowrap"
 							style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatable-buttons">
 							<thead>
 								<tr class="align-self-center">
 									<th width="5%" class="text-center">No</th>
+									<?php if($this->session->userdata('role') == 3):?>
 									<th width="10%"> </th>
+									<?php endif;?>
 									<th>Produk</th>
 									<th>Harga</th>
 									<th>Stok</th>
@@ -38,12 +42,14 @@
 								<?php $no = 1; foreach($produk as $val):?>
 								<tr>
 									<td class="text-center"><?= $no++;?></td>
+									<?php if($this->session->userdata('role') == 3):?>
 									<td>
 										<button class="btn btn-primary btn-sm" data-toggle="modal"
 											data-target="#edit-<?= $val->id;?>">edit</button>
 										<button class="btn btn-danger btn-sm" data-toggle="modal"
 											data-target="#hapus-<?= $val->id;?>">hapus</button>
 									</td>
+									<?php endif;?>
 									<td>
 										<img src="<?= base_url();?><?= $val->gambar;?>" alt=""
 											class="thumb-sm rounded-circle mr-2">

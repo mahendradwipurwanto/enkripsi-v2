@@ -39,6 +39,7 @@ class Register extends CI_Controller
                 $data_user = array(
                     'email'     => $email,
                     'aktivasi'  => $this->M_auth->create_kode(),
+                    'status'    => 1,
                     'password'  => password_hash($password, PASSWORD_DEFAULT),
                     'created_at' => time()
                 );
@@ -53,19 +54,20 @@ class Register extends CI_Controller
                     $user     = $this->M_auth->get_user($email);
                 
                     // simpan data user yang login kedalam session
-                    $session_data = array(
-                        'user_id'   => $user->user_id,
-                        'nama'      => $user->nama,
-                        'email'     => $user->email,
-                        'no_telp'   => $user->no_telp,
-                        'role'      => $user->role,
-                        'logged_in' => true,
-                    );
+                    // $session_data = array(
+                    //     'user_id'   => $user->user_id,
+                    //     'nama'      => $user->nama,
+                    //     'email'     => $user->email,
+                    //     'no_telp'   => $user->no_telp,
+                    //     'role'      => $user->role,
+                    //     'status'    => 1,
+                    //     'logged_in' => true,
+                    // );
           
-                    $this->session->set_userdata($session_data);
-          
-                    $this->session->set_flashdata('success', "Berhasil mendaftaran akun Anda. Harap melanjutkan proses aktivasi!");
-                    redirect(site_url('aktivasi-akun'));
+                    // $this->session->set_userdata($session_data);
+                    
+                    $this->session->set_flashdata('success', "Berhasil mendaftaran akun Anda.!");
+                    redirect(site_url('login'));
                 } else {
                     $this->session->set_flashdata('error', "Terjadi kesalahan saat mendaftarkan akun Anda. Harap coba lagi!");
                     redirect(site_url('register'));

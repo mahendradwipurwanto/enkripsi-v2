@@ -53,7 +53,7 @@
 		</a>
 		<div class="dropdown-menu dropdown-menu-right">
 			<div class="dropdown-title">Login pada <?= $this->session->userdata('login_time');?> WIB</div>
-			<?php if($this->session->userdata('role') == 1):?>
+			<?php if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 3):?>
 			<a href="<?= site_url('admin');?>" class="dropdown-item has-icon">
 				<i class="dripicons-device-desktop"></i> Dashboard
 			</a>

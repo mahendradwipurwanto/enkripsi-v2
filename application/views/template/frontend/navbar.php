@@ -60,25 +60,6 @@
 			</div>
 		</li>
 		<?php endif;?>
-		<?php if($this->session->userdata('role') == 1):?>
-		<li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-				class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
-			<div class="dropdown-menu dropdown-list dropdown-menu-right">
-				<div class="dropdown-header">Notifikasi</div>
-				<div class="dropdown-list-content dropdown-list-icons">
-					<a href="#" class="dropdown-item">
-						<div class="dropdown-item-icon bg-info text-white">
-							<i class="fas fa-bell"></i>
-						</div>
-						<div class="dropdown-item-desc">
-							Welcome to Stisla template!
-							<div class="time">Yesterday</div>
-						</div>
-					</a>
-				</div>
-			</div>
-		</li>
-		<?php endif;?>
 		<?php endif;?>
 		<?php if(!$this->session->userdata('logged_in') || $this->session->userdata('logged_in') == false):?>
 		<li class="ml-2"><a href="<?= site_url('login');?>" class="btn btn-outline-light btn-sm">Masuk ke akun anda</a>
@@ -93,7 +74,7 @@
 			</a>
 			<div class="dropdown-menu dropdown-menu-right">
 				<div class="dropdown-title">Login pada <?= $this->session->userdata('login_time');?> WIB</div>
-				<?php if($this->session->userdata('role') == 1):?>
+				<?php if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 3):?>
 				<a href="<?= site_url('admin');?>" class="dropdown-item has-icon">
 					<i class="dripicons-device-desktop"></i> Dashboard
 				</a>

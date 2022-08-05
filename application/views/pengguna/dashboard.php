@@ -84,6 +84,7 @@
 									<th>Jumlah produk</th>
 									<th>Metode Pembayaran</th>
 									<th>Bukti Pembayaran</th>
+									<th width="5%">Status</th>
 									<th> </th>
 								</tr>
 							</thead>
@@ -100,6 +101,13 @@
 											data-target="#bukti-bayar-<?= $val['id'];?>">lihat</button>
 										<?php else:?>
 										-
+										<?php endif;?>
+									</td>
+									<td>
+										<?php if($val['status'] == 1):?>
+										<span class="badge badge-secondary">Menunggu diverifikasi</span>
+										<?php else:?>
+										<span class="badge badge-success">Sudah diverifikasi</span>
 										<?php endif;?>
 									</td>
 									<td width="10%" class="text-center"><button class="btn btn-primary btn-sm"

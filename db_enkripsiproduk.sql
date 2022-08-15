@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.22-MariaDB : Database - db_otpproduk
+MySQL - 10.4.22-MariaDB : Database - db_enkripsi_toko
 *********************************************************************
 */
 
@@ -12,6 +12,9 @@ MySQL - 10.4.22-MariaDB : Database - db_otpproduk
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_enkripsi_toko` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `db_enkripsi_toko`;
 
 /*Table structure for table `tb_auth` */
 
@@ -54,8 +57,7 @@ CREATE TABLE `tb_checkout` (
   `created_at` int(11) NOT NULL DEFAULT 0,
   `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `tb_checkout_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_auth` (`user_id`)
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_checkout` */
@@ -75,9 +77,7 @@ CREATE TABLE `tb_checkout_detail` (
   `produk_id` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
   KEY `wishlist_id` (`checkout_id`),
-  KEY `produk_id` (`produk_id`),
-  CONSTRAINT `tb_checkout_detail_ibfk_1` FOREIGN KEY (`checkout_id`) REFERENCES `tb_checkout` (`id`),
-  CONSTRAINT `tb_checkout_detail_ibfk_2` FOREIGN KEY (`produk_id`) REFERENCES `tb_produk` (`id`)
+  KEY `produk_id` (`produk_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_checkout_detail` */
@@ -442,8 +442,7 @@ CREATE TABLE `tb_user` (
   `jk` char(1) DEFAULT 'L',
   `pekerjaan` varchar(50) DEFAULT NULL,
   `gaji` varchar(50) DEFAULT NULL,
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_auth` (`user_id`)
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_user` */
